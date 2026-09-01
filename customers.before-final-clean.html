@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Customers — FLOWLY</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#080808;color:#f5f2ec;font-family:Inter,"Noto Sans Thai",Arial,sans-serif}.app{min-height:100vh;display:flex}.side{width:235px;background:#0d0d0d;border-right:1px solid #202020;padding:25px 16px;flex-shrink:0}.logo{font-size:23px;letter-spacing:.2em;font-weight:800;padding:0 12px 28px;display:block}.logo i{font-style:normal;color:#c89c58}.section{font-size:10px;color:#555;letter-spacing:.15em;padding:18px 12px 8px}.nav{display:block;padding:11px 12px;border-radius:9px;color:#888;font-size:13px;margin:2px 0}.nav.active,.nav:hover{background:#19150f;color:#d4aa67}.main{flex:1;min-width:0}.top{height:72px;border-bottom:1px solid #202020;display:flex;align-items:center;justify-content:space-between;padding:0 32px}.crumb{color:#777;font-size:13px}.user{display:flex;align-items:center;gap:11px;font-size:13px}.avatar{width:34px;height:34px;border-radius:50%;background:#1e1e1e;border:1px solid #333;display:grid;place-items:center;color:#c89c58;font-weight:800}.content{max-width:1250px;margin:auto;padding:36px 32px 70px}.head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:25px}.kicker{font-size:11px;letter-spacing:.18em;color:#c89c58;font-weight:800}.head h1{font-size:34px;margin:8px 0 0}.btn{border:0;border-radius:10px;padding:12px 17px;background:#c89c58;color:#111;font-weight:800;cursor:pointer}.toolbar{display:flex;justify-content:space-between;gap:12px;margin-bottom:15px}.search{width:min(390px,100%);padding:12px 14px;border:1px solid #292929;border-radius:10px;background:#101010;color:#eee;outline:none}.search:focus{border-color:#c89c58}.table{background:#101010;border:1px solid #242424;border-radius:15px;overflow:hidden}.thead,.tr{display:grid;grid-template-columns:2.1fr 1.5fr 1.1fr .9fr .7fr;align-items:center}.thead{background:#0d0d0d;color:#666;font-size:11px}.thead div,.tr div{padding:15px 17px}.tr{border-top:1px solid #202020;font-size:13px}.tr:hover{background:#121212}.name{display:flex;align-items:center;gap:11px}.mini{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#1c1c1c;color:#c89c58;font-size:12px;font-weight:800}.sub{display:block;color:#666;font-size:10px;margin-top:2px}.tag{display:inline-block;padding:5px 8px;border:1px solid #2c2c2c;border-radius:20px;color:#999;font-size:10px}.tag.gold{border-color:#4a3925;color:#c89c58}.dots{color:#777;text-align:right;cursor:pointer}.empty{display:none;text-align:center;padding:45px;color:#777}.footrow{padding:13px 17px;color:#666;font-size:11px;border-top:1px solid #202020}.modal{display:none;position:fixed;inset:0;background:#000b;align-items:center;justify-content:center;padding:20px}.modal.open{display:flex}.modalbox{width:min(500px,100%);background:#111;border:1px solid #2b2b2b;border-radius:16px;padding:25px}.modalbox h2{margin:0 0 6px}.muted{color:#777;font-size:13px;margin:0 0 22px}label{display:block;color:#aaa;font-size:12px;margin:13px 0 6px}input,select{width:100%;padding:12px;border:1px solid #292929;border-radius:9px;background:#0b0b0b;color:#eee}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.actions{display:flex;gap:8px}.actions button{flex:1;margin-top:20px}.cancel{background:#1b1b1b;color:#aaa}
+@media(max-width:900px){.side{width:190px}.thead,.tr{grid-template-columns:2fr 1.3fr 1fr .8fr .5fr}}
+@media(max-width:680px){.side{display:none}.top{padding:0 18px}.content{padding:25px 15px}.head{display:block}.head .btn{margin-top:15px}.toolbar{display:block}.search{width:100%;margin-bottom:10px}.table{overflow-x:auto}.thead,.tr{min-width:760px}.grid{grid-template-columns:1fr}}
+</style>
+<link rel="stylesheet" href="design-system.css"><script src="flowly-config.js"></script></head>
+<body>
+<div class="app">
+<aside class="side">
+<a class="logo" href="index.html">FLOW<i>LY</i></a>
+<div class="section">WORKSPACE</div><a class="nav" href="dashboard.html">⌂ &nbsp; Dashboard</a><a class="nav" href="booking.html">◷ &nbsp; Booking</a><a class="nav active" href="customers.html">◯ &nbsp; Customers</a>
+<div class="section">INSIGHTS</div><a class="nav" href="business-data.html">▥ &nbsp; Business Data</a><a class="nav" href="ai-assistant.html">✦ &nbsp; AI Assistant</a><div class="section">SYSTEM</div><a class="nav" href="settings.html">⚙ &nbsp; Settings</a>
+</aside>
+<main class="main">
+<header class="top"><span class="crumb">Workspace / Customers</span><div class="user"><span>FLOWLY Business</span><div class="avatar">F</div></div></header>
+<div class="head"><div><div class="kicker">CUSTOMER MANAGEMENT</div><h1>ลูกค้า</h1></div><button class="btn" id="newBtn">＋ New Customer</button></div>
+<div class="toolbar"><input class="search" id="search" placeholder="ค้นหาชื่อลูกค้า หรืออีเมล..."><span style="color:#666;font-size:11px;padding-top:12px">1,284 customers · Demo Data</span></div>
+<div class="table">
+<div class="thead"><div>ลูกค้า</div><div>ติดต่อ</div><div>ล่าสุด</div><div>สถานะ</div><div></div></div>
+<div id="list">
+<div class="tr"><div class="name"><div class="mini">CA</div><div><b>Customer A</b><span class="sub">customer.a@example.com</span></div></div><div>08x-xxx-1001</div><div>27 ส.ค. 2026</div><div><span class="tag gold">Active</span></div><div class="dots">•••</div></div>
+<div class="tr"><div class="name"><div class="mini">CB</div><div><b>Customer B</b><span class="sub">customer.b@example.com</span></div></div><div>08x-xxx-1002</div><div>26 ส.ค. 2026</div><div><span class="tag gold">Active</span></div><div class="dots">•••</div></div>
+<div class="tr"><div class="name"><div class="mini">CC</div><div><b>Customer C</b><span class="sub">customer.c@example.com</span></div></div><div>08x-xxx-1003</div><div>24 ส.ค. 2026</div><div><span class="tag">Pending</span></div><div class="dots">•••</div></div>
+<div class="tr"><div class="name"><div class="mini">CD</div><div><b>Customer D</b><span class="sub">customer.d@example.com</span></div></div><div>08x-xxx-1004</div><div>22 ส.ค. 2026</div><div><span class="tag gold">Active</span></div><div class="dots">•••</div></div>
+<div class="tr"><div class="name"><div class="mini">CE</div><div><b>Customer E</b><span class="sub">customer.e@example.com</span></div></div><div>08x-xxx-1005</div><div>20 ส.ค. 2026</div><div><span class="tag">Pending</span></div><div class="dots">•••</div></div>
+</div>
+<div id="empty" class="empty">ไม่พบลูกค้าที่ค้นหา</div>
+<div class="footrow">แสดง 5 รายการตัวอย่างจากทั้งหมด 1,284 รายการ</div>
+</div>
+</section>
+
+
+<div id="customerApiMode" style="margin-top:10px;padding:9px 11px;border:1px solid #202020;border-radius:9px;font-size:10px;color:#777">
+  DATA MODE: <span id="customerDataMode">Demo / Browser</span>
+</div>
+
+<section id="customerDemoPanel" class="panel" style="margin-top:18px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px;">
+    <div>
+      <div class="kicker">CUSTOMERS</div>
+      <h2 style="margin:4px 0 2px;">ลูกค้าล่าสุด</h2>
+      <p style="margin:0;">ข้อมูล Demo บันทึกไว้ในเบราว์เซอร์เครื่องนี้</p>
+    </div>
+    <button id="addCustomerDemo" class="btn">เพิ่มลูกค้า</button>
+  </div>
+  <div id="customerDemoList"></div>
+</section>
+
+
+<section id="customerDetail" class="panel" style="margin-top:18px;display:none;">
+  <div class="kicker">CUSTOMER DETAIL</div>
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:14px;">
+    <div>
+      <h2 id="detailName" style="margin:6px 0 4px;"></h2>
+      <p id="detailPhone" style="margin:0;"></p>
+    </div>
+    <button id="closeCustomerDetail" class="btn secondary">ปิด</button>
+  </div>
+  <div id="detailBookings" style="margin-top:16px;"></div>
+</section>
+</main></div>
+<div class="modal" id="modal"><div class="modalbox"><h2>เพิ่มลูกค้า</h2><p class="muted">V1 Preview · ยังไม่บันทึกลงฐานข้อมูลจริง</p>
+<div class="grid"><div><label>ชื่อ</label><input id="first" placeholder="ชื่อ"></div><div><label>นามสกุล</label><input id="last" placeholder="นามสกุล"></div></div>
+<label>อีเมล</label><input id="email" type="email" placeholder="customer@example.com"><label>เบอร์โทร</label><input id="phone" placeholder="08x-xxx-xxxx">
+<div class="actions"><button class="btn cancel" id="cancel">ยกเลิก</button><button class="btn" id="save">เพิ่มลูกค้า</button></div></div></div>
+<script>
+const modal=document.getElementById('modal');
+document.getElementById('newBtn').onclick=()=>modal.classList.add('open');
+document.getElementById('cancel').onclick=()=>modal.classList.remove('open');
+document.getElementById('save').onclick=()=>{
+ if(!document.getElementById('first').value.trim()){document.getElementById('first').focus();return}
+ modal.classList.remove('open'); alert('เพิ่มลูกค้า Demo สำเร็จ — ยังไม่ได้บันทึกฐานข้อมูลจริง');
+};
+modal.onclick=e=>{if(e.target===modal)modal.classList.remove('open')};
+document.getElementById('search').addEventListener('input',function(){
+ const q=this.value.toLowerCase().trim(); let found=0;
+ document.querySelectorAll('#list .tr').forEach(r=>{const ok=r.textContent.toLowerCase().includes(q);r.style.display=ok?'grid':'none';if(ok)found++});
+ document.getElementById('empty').style.display=found?'none':'block';
+});
+</script>
+
+<script>
+(function(){
+  const KEY='flowly_demo_customers_v1';
+  const list=document.getElementById('customerDemoList');
+  const add=document.getElementById('addCustomerDemo');
+  if(!list || !add) return;
+
+  function load(){
+    try{return JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){return[]}
+  }
+  function esc(v){
+    return String(v).replace(/[<>&"]/g,'');
+  }
+  function render(){
+    const items=load();
+    if(!items.length){
+      list.innerHTML='<div style="padding:14px 0;color:#555;font-size:12px">ยังไม่มีลูกค้าใน Demo</div>';
+      return;
+    }
+    list.innerHTML=items.slice(0,10).map((x,i)=>`
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-top:1px solid #202020">
+        <div>
+          <div style="font-size:13px;font-weight:700">${esc(x.name)}</div>
+          <div style="font-size:10px;color:#666;margin-top:3px">${esc(x.phone||'ไม่ระบุเบอร์')}</div>
+        </div>
+        <button data-open="${i}" class="btn secondary" style="margin-right:6px">ดูประวัติ</button><button data-remove="${i}" class="btn secondary" style="padding:8px 10px;font-size:10px">ลบ Demo</button>
+      </div>`).join('');
+    list.querySelectorAll('[data-remove]').forEach(btn=>{
+      btn.onclick=()=>{
+        const items=load();
+        items.splice(Number(btn.dataset.remove),1);
+        localStorage.setItem(KEY,JSON.stringify(items));
+        render();
+      };
+    });
+  }
+  add.onclick=()=>{
+    const name=prompt('ชื่อลูกค้า');
+    if(!name || !name.trim()) return;
+    const phone=prompt('เบอร์โทร (ถ้ามี)') || '';
+    const items=load();
+    items.unshift({name:name.trim(),phone:phone.trim()});
+    localStorage.setItem(KEY,JSON.stringify(items.slice(0,50)));
+    render();
+  };
+  render();
+})();
+</script>
+
+
+<script>
+(function(){
+ const detail=document.getElementById('customerDetail');
+ const nameEl=document.getElementById('detailName');
+ const phoneEl=document.getElementById('detailPhone');
+ const bookingsEl=document.getElementById('detailBookings');
+ const close=document.getElementById('closeCustomerDetail');
+ const getC=()=>{try{return JSON.parse(localStorage.getItem('flowly_demo_customers_v1')||'[]')}catch(e){return[]}};
+ const getB=()=>{try{return JSON.parse(localStorage.getItem('flowly_demo_bookings_v1')||'[]')}catch(e){return[]}};
+ function openCustomer(i){
+   const c=getC()[i]; if(!c)return;
+   detail.style.display='block';
+   nameEl.textContent=c.name;
+   phoneEl.textContent=c.phone||'ไม่ระบุเบอร์';
+   const rows=getB().filter(x=>x.name===c.name);
+   bookingsEl.innerHTML=rows.length ? rows.map(x=>`
+     <div style="display:grid;grid-template-columns:1.2fr .8fr .7fr .8fr;gap:10px;padding:10px 0;border-top:1px solid #202020;font-size:11px">
+       <div>${x.service||'-'}</div><div>${x.date||'-'} ${x.time||''}</div>
+       <div>฿${({บริการด่วน:500,บริการมาตรฐาน:800,บริการพรีเมียม:1200}[x.service]||0).toLocaleString('th-TH')}</div>
+       <div>${x.status||'Pending'}</div>
+     </div>`).join('') : '<div style="padding:12px 0;color:#555;font-size:12px">ยังไม่มีประวัติ Booking</div>';
+   detail.scrollIntoView({behavior:'smooth',block:'start'});
+ }
+ document.addEventListener('click',e=>{
+   const b=e.target.closest('[data-open]');
+   if(b){e.preventDefault();openCustomer(Number(b.dataset.open));}
+ });
+ if(close) close.onclick=()=>detail.style.display='none';
+})();
+</script>
+
+<script>
+/* FLOWLY_CUSTOMER_API_V1
+ * API-first adapter. Demo storage remains available until the API is configured.
+ */
+(function(){
+  const mode=document.getElementById('customerDataMode');
+  const list=document.getElementById('customerDemoList');
+  if(!mode || !list) return;
+
+  const API_BASE = window.FLOWLY_API_BASE || "";
+  async function api(path, options={}){
+    const r=await fetch(API_BASE+path,{credentials:'include',headers:{'Content-Type':'application/json',...(options.headers||{})},...options});
+    const body=await r.json().catch(()=>({}));
+    if(!r.ok) throw new Error(body?.error?.message||'API request failed');
+    return body.data;
+  }
+
+  async function tryApi(){
+    if(!API_BASE && location.protocol === 'file:') return false;
+    try{
+      const rows=await api('/api/v1/customers');
+      mode.textContent='Production API';
+      if(!Array.isArray(rows)) return false;
+      if(!rows.length){
+        list.innerHTML='<div style="padding:14px 0;color:#555;font-size:12px">ยังไม่มีลูกค้า</div>';
+        return true;
+      }
+      list.innerHTML=rows.slice(0,20).map(x=>`
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-top:1px solid #202020">
+          <div><div style="font-size:13px;font-weight:700">${String(x.name||'').replace(/[<>&"]/g,'')}</div>
+          <div style="font-size:10px;color:#666;margin-top:3px">${String(x.phone||'ไม่ระบุเบอร์').replace(/[<>&"]/g,'')}</div></div>
+          <span style="font-size:9px;color:#777">API</span>
+        </div>`).join('');
+      return true;
+    }catch(e){
+      mode.textContent='Demo / Browser';
+      return false;
+    }
+  }
+
+  const btn=document.createElement('button');
+  btn.className='btn secondary';
+  btn.textContent='เชื่อม API';
+  btn.style.marginTop='8px';
+  btn.onclick=tryApi;
+  mode.parentElement.appendChild(btn);
+
+  tryApi();
+})();
+</script>
+
+<script>
+/* FLOWLY_CUSTOMER_CREATE_API_V1 */
+(function(){
+  const API_BASE = window.FLOWLY_API_BASE || "";
+  const form = document.querySelector('form');
+  if(!form || location.protocol === 'file:') return;
+
+  const nameInput = form.querySelector('input[name="name"], #name, input[placeholder*="ชื่อ"]');
+  const phoneInput = form.querySelector('input[name="phone"], #phone, input[placeholder*="เบอร์"]');
+  if(!nameInput) return;
+
+  let msg = document.getElementById('customerApiCreateMessage');
+  if(!msg){
+    msg=document.createElement('div');
+    msg.id='customerApiCreateMessage';
+    msg.setAttribute('aria-live','polite');
+    msg.style.cssText='font-size:11px;color:#777;margin-top:8px';
+    form.appendChild(msg);
+  }
+
+  const originalSubmit = form.onsubmit;
+  form.addEventListener('submit', async function(e){
+    if(!API_BASE) return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+
+    const name=nameInput.value.trim();
+    const phone=phoneInput ? phoneInput.value.trim() : '';
+    if(!name){ msg.textContent='กรุณากรอกชื่อลูกค้า'; nameInput.focus(); return; }
+
+    msg.textContent='กำลังบันทึกลูกค้าผ่าน API...';
+    try{
+      const r=await fetch(API_BASE+'/api/v1/customers',{
+        method:'POST',
+        credentials:'include',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({name,phone})
+      });
+      const body=await r.json().catch(()=>({}));
+      if(!r.ok) throw new Error(body?.error?.message||'ไม่สามารถบันทึกลูกค้าได้');
+      msg.textContent='บันทึกลูกค้าสำเร็จ';
+      form.reset();
+      setTimeout(()=>location.reload(),250);
+    }catch(err){
+      msg.textContent=err.message;
+    }
+  }, true);
+})();
+</script>
+
+
+<script>/* FLOWLY_CUSTOMER_CRUD_UI_V3 */
+(function(){const API_BASE=window.FLOWLY_API_BASE||"";if(!API_BASE||location.protocol==='file:')return;const list=document.getElementById('customerDemoList');if(!list)return;const esc=v=>String(v??'').replace(/[<>&"]/g,'');let customers=[];async function load(){try{const r=await fetch(API_BASE+'/api/v1/customers',{credentials:'include'}),b=await r.json().catch(()=>({}));if(!r.ok||!Array.isArray(b.data))return;customers=b.data;list.innerHTML=customers.slice(0,20).map(x=>`<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-top:1px solid #202020" data-customer-id="${esc(x.id)}"><div><div style="font-size:13px;font-weight:700">${esc(x.name)}</div><div style="font-size:10px;color:#666;margin-top:3px">${esc(x.phone||'ไม่ระบุเบอร์')}</div></div><div style="display:flex;gap:7px"><button type="button" class="btn secondary" data-edit="${esc(x.id)}">แก้ไข</button><button type="button" class="btn secondary" data-delete="${esc(x.id)}">ลบ</button></div></div>`).join('')||'<div style="padding:14px 0;color:#555;font-size:12px">ยังไม่มีลูกค้า</div>'}catch(e){}}function edit(c){const m=document.createElement('div');m.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.65);display:flex;align-items:center;justify-content:center;z-index:10000;padding:16px';m.innerHTML=`<div style="width:min(440px,100%);background:#101010;border:1px solid #292929;border-radius:14px;padding:20px"><h3>แก้ไขข้อมูลลูกค้า</h3><label>ชื่อ</label><input id="cn" value="${esc(c.name)}" style="width:100%;margin:6px 0 12px;box-sizing:border-box"><label>เบอร์โทร</label><input id="cp" value="${esc(c.phone||'')}" style="width:100%;margin:6px 0 14px;box-sizing:border-box"><div id="cm" style="font-size:11px;color:#777;min-height:16px"></div><div style="text-align:right"><button class="btn secondary" id="cx">ยกเลิก</button> <button class="btn" id="cs">บันทึก</button></div></div>`;document.body.appendChild(m);m.querySelector('#cx').onclick=()=>m.remove();m.querySelector('#cs').onclick=async()=>{const name=m.querySelector('#cn').value.trim(),phone=m.querySelector('#cp').value.trim(),msg=m.querySelector('#cm');if(!name){msg.textContent='กรุณากรอกชื่อ';return}msg.textContent='กำลังบันทึก...';const r=await fetch(API_BASE+'/api/v1/customers/'+encodeURIComponent(c.id),{method:'PUT',credentials:'include',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,phone})});if(!r.ok){const b=await r.json().catch(()=>({}));msg.textContent=b?.error?.message||'แก้ไขไม่สำเร็จ';return}m.remove();load()}}list.addEventListener('click',async e=>{const ed=e.target.closest('[data-edit]'),del=e.target.closest('[data-delete]');if(ed){const c=customers.find(x=>String(x.id)===ed.dataset.edit);if(c)edit(c)}if(del){const id=del.dataset.delete;if(!confirm('ต้องการลบลูกค้ารายนี้หรือไม่?'))return;const r=await fetch(API_BASE+'/api/v1/customers/'+encodeURIComponent(id),{method:'DELETE',credentials:'include'});if(!r.ok){const b=await r.json().catch(()=>({}));alert(b?.error?.message||'ไม่สามารถลบลูกค้าได้');return}load()}});load()})();</script></body></html>

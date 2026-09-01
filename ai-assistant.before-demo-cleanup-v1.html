@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Assistant — FLOWLY</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#080808;color:#f4f1eb;font-family:Inter,"Noto Sans Thai",Arial,sans-serif;-webkit-font-smoothing:antialiased}.app{min-height:100vh;display:flex}.side{width:235px;background:#0d0d0d;border-right:1px solid #202020;padding:25px 16px;flex-shrink:0}.logo{font-size:23px;letter-spacing:.2em;font-weight:800;padding:0 12px 28px;display:block;color:#f4f1eb;text-decoration:none}.logo i{font-style:normal;color:#c89c58}.section{font-size:10px;color:#555;letter-spacing:.15em;padding:18px 12px 8px}.nav{display:block;padding:11px 12px;border-radius:9px;color:#888;font-size:13px;margin:2px 0;text-decoration:none}.nav.active,.nav:hover{background:#19150f;color:#d4aa67}.main{flex:1;min-width:0}.top{height:72px;border-bottom:1px solid #202020;display:flex;align-items:center;justify-content:space-between;padding:0 32px}.crumb{color:#777;font-size:13px}.user{display:flex;align-items:center;gap:11px;font-size:13px}.avatar{width:34px;height:34px;border-radius:50%;background:#1e1e1e;border:1px solid #333;display:grid;place-items:center;color:#c89c58;font-weight:800}.content{max-width:1180px;margin:auto;padding:38px 32px 70px}.hero{text-align:center;max-width:700px;margin:25px auto 30px}.kicker{font-size:10px;letter-spacing:.22em;color:#c89c58;font-weight:800}.hero h1{font-size:36px;letter-spacing:-.02em;margin:10px 0}.hero p{margin:0;color:#777;font-size:13px;line-height:1.8}.shell{max-width:900px;margin:auto;background:#0e0e0e;border:1px solid #242424;border-radius:18px;overflow:hidden;box-shadow:0 20px 60px #0008}.chat{min-height:390px;padding:26px}.msg{display:flex;gap:12px;margin-bottom:24px}.boticon{width:35px;height:35px;border-radius:11px;border:1px solid #4a3925;color:#c89c58;display:grid;place-items:center;font-size:13px;font-weight:800;flex-shrink:0}.bubble{max-width:700px;background:#141414;border:1px solid #242424;border-radius:4px 14px 14px 14px;padding:15px 17px;color:#c8c3ba;font-size:13px;line-height:1.75}.bubble b{color:#f1ede6}.quick{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 24px 47px}.quick button{border:1px solid #292929;background:#101010;color:#999;border-radius:20px;padding:9px 13px;font-size:11px;cursor:pointer}.quick button:hover{border-color:#6b5230;color:#d4aa67}.composer{border-top:1px solid #222;padding:17px;background:#0b0b0b}.inputbox{display:flex;align-items:flex-end;gap:10px;border:1px solid #2a2a2a;border-radius:13px;background:#111;padding:10px 10px 10px 15px}.inputbox:focus-within{border-color:#5a452b}.inputbox textarea{flex:1;resize:none;min-height:48px;max-height:120px;border:0;outline:0;background:transparent;color:#eee;font:13px/1.6 inherit}.send{width:42px;height:42px;border:0;border-radius:10px;background:#c89c58;color:#111;font-weight:900;cursor:pointer}.hint{text-align:center;color:#555;font-size:10px;margin-top:9px}.features{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:900px;margin:15px auto}.feature{background:#101010;border:1px solid #222;border-radius:13px;padding:18px}.feature span{display:block;color:#c89c58;font-size:16px;margin-bottom:9px}.feature b{font-size:12px}.feature p{font-size:11px;color:#666;line-height:1.6;margin:7px 0 0}.notice{margin-top:18px;text-align:center;color:#555;font-size:10px}
+@media(max-width:900px){.side{width:190px}.features{grid-template-columns:1fr}}
+@media(max-width:650px){.side{display:none}.top{padding:0 18px}.content{padding:25px 15px}.hero h1{font-size:30px}.chat{min-height:330px;padding:18px}.quick{margin-left:0}.features{display:block}.feature{margin-bottom:9px}}
+</style>
+<link rel="stylesheet" href="design-system.css"><script src="flowly-config.js"></script></head>
+<body>
+<div class="app">
+<aside class="side"><a class="logo" href="index.html">FLOW<i>LY</i></a>
+<div class="section">WORKSPACE</div><a class="nav" href="dashboard.html">⌂ &nbsp; Dashboard</a><a class="nav" href="booking.html">◷ &nbsp; Booking</a><a class="nav" href="customers.html">◯ &nbsp; Customers</a>
+<div class="section">INSIGHTS</div><a class="nav" href="business-data.html">▥ &nbsp; Business Data</a><a class="nav active" href="ai-assistant.html">✦ &nbsp; AI Assistant</a>
+<div class="section">SYSTEM</div><a class="nav" href="settings.html">⚙ &nbsp; Settings</a></aside>
+<main class="main"><header class="top"><span class="crumb">Workspace / AI Assistant</span><div class="user"><span>Demo Business</span><div class="avatar">D</div></div></header>
+<section class="content">
+<div class="hero"><div class="kicker">FLOWLY INTELLIGENCE</div><h1>ผู้ช่วยธุรกิจของคุณ</h1><p>ถามข้อมูล วิเคราะห์ธุรกิจ หรือให้ FLOWLY ช่วยคิดสิ่งที่ควรทำต่อไป</p></div>
+<div class="shell"><div class="chat" id="chat">
+<div class="msg"><div class="boticon">F</div><div class="bubble"><b>สวัสดีครับ 👋</b><br>ผมคือ FLOWLY AI Assistant ช่วยคุณดูข้อมูลธุรกิจ สรุปผลการดำเนินงาน และหา Insight จากข้อมูลของคุณได้ครับ</div></div>
+<div class="quick"><button data-q="สรุปรายได้ของฉัน">สรุปรายได้</button><button data-q="ลูกค้าของฉันเป็นอย่างไร">วิเคราะห์ลูกค้า</button><button data-q="วันนี้ควรทำอะไร">แนะนำสิ่งที่ควรทำ</button></div>
+</div>
+<div class="composer"><div class="inputbox"><textarea id="prompt" placeholder="ถาม FLOWLY อะไรก็ได้..." rows="1"></textarea><button class="send" id="send">↑</button></div><div class="hint">V1 Preview · AI ยังไม่ได้เชื่อมกับข้อมูลธุรกิจจริง</div></div></div>
+<div class="features"><div class="feature"><span>✦</span><b>Business Insights</b><p>ช่วยมองภาพรวมและหาโอกาสจากข้อมูลธุรกิจ</p></div><div class="feature"><span>◌</span><b>Smart Analysis</b><p>สรุปข้อมูลให้อ่านง่ายและตัดสินใจเร็วขึ้น</p></div><div class="feature"><span>↗</span><b>Next Actions</b><p>ช่วยเสนอสิ่งที่ควรทำต่อจากข้อมูลที่มี</p></div></div>
+<div class="notice">ข้อมูลตัวอย่างสำหรับทดสอบหน้าตาและประสบการณ์ใช้งานเท่านั้น</div>
+</section></main></div>
+<script>
+const chat=document.getElementById('chat'), prompt=document.getElementById('prompt');
+function send(){
+ const q=prompt.value.trim(); if(!q)return;
+ const m=document.createElement('div');m.className='msg';m.innerHTML='<div class="boticon">D</div><div class="bubble">'+q.replace(/[&<>]/g,s=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[s]))+'</div>';chat.appendChild(m);
+ const r=document.createElement('div');r.className='msg';r.innerHTML='<div class="boticon">F</div><div class="bubble">รับคำถามแล้วครับ ✦<br><span style="color:#777">V1 Demo: ระบบ AI จริงจะถูกเชื่อมในขั้นถัดไป หลังจากโครงสร้างหลักผ่านการทดสอบ</span></div>';chat.appendChild(r);prompt.value='';chat.scrollTop=chat.scrollHeight;
+}
+document.getElementById('send').onclick=send;
+prompt.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send()}});
+document.querySelectorAll('.quick button').forEach(b=>b.onclick=()=>{prompt.value=b.dataset.q;send()});
+</script>
+</body></html>

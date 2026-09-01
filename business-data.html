@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Business Data — FLOWLY</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#080808;color:#f5f2ec;font-family:Inter,"Noto Sans Thai",Arial,sans-serif}.app{min-height:100vh;display:flex}.side{width:235px;background:#0d0d0d;border-right:1px solid #202020;padding:25px 16px;flex-shrink:0}.logo{font-size:23px;letter-spacing:.2em;font-weight:800;padding:0 12px 28px;display:block}.logo i{font-style:normal;color:#c89c58}.section{font-size:10px;color:#555;letter-spacing:.15em;padding:18px 12px 8px}.nav{display:block;padding:11px 12px;border-radius:9px;color:#888;font-size:13px;margin:2px 0}.nav.active,.nav:hover{background:#19150f;color:#d4aa67}.main{flex:1;min-width:0}.top{height:72px;border-bottom:1px solid #202020;display:flex;align-items:center;justify-content:space-between;padding:0 32px}.crumb{color:#777;font-size:13px}.user{display:flex;align-items:center;gap:11px;font-size:13px}.avatar{width:34px;height:34px;border-radius:50%;background:#1e1e1e;border:1px solid #333;display:grid;place-items:center;color:#c89c58;font-weight:800}.content{max-width:1250px;margin:auto;padding:36px 32px 70px}.head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:25px}.kicker{font-size:11px;letter-spacing:.18em;color:#c89c58;font-weight:800}.head h1{font-size:34px;margin:8px 0 0}.muted{color:#666;font-size:12px}.tabs{display:flex;gap:6px;margin-bottom:16px}.tab{background:#101010;border:1px solid #252525;color:#777;border-radius:9px;padding:10px 14px;font-size:12px;cursor:pointer}.tab.active{color:#d4aa67;border-color:#4a3925;background:#17120c}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.card,.panel{background:#101010;border:1px solid #242424;border-radius:15px}.card{padding:20px}.label{font-size:12px;color:#777}.value{font-size:28px;font-weight:800;margin:8px 0}.gold{color:#c89c58}.delta{font-size:11px;color:#777}.layout{display:grid;grid-template-columns:1.55fr .85fr;gap:15px;margin-top:15px}.panel{padding:22px}.panelhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.panelhead b{font-size:15px}.panelhead span{font-size:11px;color:#666}.chart{height:270px;border:1px solid #202020;border-radius:12px;padding:16px}.chart svg{width:100%;height:100%}.bars{height:230px;display:flex;align-items:end;gap:12px;padding:10px 4px;border-bottom:1px solid #292929}.bar{flex:1;background:#c89c58;opacity:.75;border-radius:5px 5px 0 0;min-height:8px}.barwrap{height:100%;flex:1;display:flex;align-items:end}.barlabel{font-size:9px;color:#555;text-align:center;margin-top:8px}.metric{display:flex;justify-content:space-between;padding:13px 0;border-bottom:1px solid #202020;font-size:12px}.metric:last-child{border:0}.metric span{color:#777}.status{padding:5px 8px;border-radius:20px;border:1px solid #4a3925;color:#c89c58;font-size:10px}.table{margin-top:15px}.row{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;padding:14px 0;border-bottom:1px solid #202020;font-size:12px}.row.headrow{color:#666;font-size:11px}.row div:not(:first-child){text-align:right}
+@media(max-width:900px){.side{width:190px}.cards{grid-template-columns:1fr 1fr}.layout{grid-template-columns:1fr}}
+@media(max-width:650px){.side{display:none}.top{padding:0 18px}.content{padding:25px 15px}.head{display:block}.cards{grid-template-columns:1fr 1fr}.layout{display:block}.panel{margin-bottom:15px}.row{min-width:520px}.table{overflow:auto}}
+</style>
+<link rel="stylesheet" href="design-system.css"><script src="flowly-config.js"></script></head>
+<body>
+<div class="app">
+<aside class="side"><a class="logo" href="index.html">FLOW<i>LY</i></a>
+<div class="section">WORKSPACE</div><a class="nav" href="dashboard.html">⌂ &nbsp; Dashboard</a><a class="nav" href="booking.html">◷ &nbsp; Booking</a><a class="nav" href="customers.html">◯ &nbsp; Customers</a>
+<div class="section">INSIGHTS</div><a class="nav active" href="business-data.html">▥ &nbsp; Business Data</a><a class="nav" href="ai-assistant.html">✦ &nbsp; AI Assistant</a><div class="section">SYSTEM</div><a class="nav" href="settings.html">⚙ &nbsp; Settings</a></aside>
+<main class="main">
+
+<header class="top">
+  <span class="crumb">Workspace / Business Data</span>
+  <div class="user">
+    <span>FLOWLY Business</span>
+    <div class="avatar">F</div>
+  </div>
+</header>
+
+<section class="content">
+
+  <div class="head">
+    <div>
+      <div class="kicker">BUSINESS INTELLIGENCE</div>
+      <h1>ข้อมูลธุรกิจ</h1>
+      <div class="muted">ภาพรวมและข้อมูลเชิงลึกของธุรกิจ</div>
+    </div>
+  </div>
+
+  <div class="panel" style="padding:42px 28px;text-align:center;">
+    <div style="font-size:28px;margin-bottom:12px;">▥</div>
+
+    <h2 style="margin:0 0 8px;font-size:18px;">
+      ข้อมูลเชิงลึกกำลังรอข้อมูลเพิ่มเติม
+    </h2>
+
+    <p class="muted" style="margin:0;">
+      ข้อมูลวิเคราะห์ธุรกิจจะแสดงเมื่อมีข้อมูลการใช้งานเพียงพอ
+    </p>
+  </div>
+
+</section>
+
+</main>
+</div>

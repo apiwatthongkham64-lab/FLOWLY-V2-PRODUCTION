@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Settings — FLOWLY</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#080808;color:#f4f1eb;font-family:Inter,"Noto Sans Thai",Arial,sans-serif;-webkit-font-smoothing:antialiased}.app{min-height:100vh;display:flex}.side{width:235px;background:#0d0d0d;border-right:1px solid #202020;padding:25px 16px;flex-shrink:0}.logo{font-size:23px;letter-spacing:.2em;font-weight:800;padding:0 12px 28px;display:block;color:#f4f1eb;text-decoration:none}.logo i{font-style:normal;color:#c89c58}.section{font-size:10px;color:#555;letter-spacing:.15em;padding:18px 12px 8px}.nav{display:block;padding:11px 12px;border-radius:9px;color:#888;font-size:13px;margin:2px 0;text-decoration:none}.nav.active,.nav:hover{background:#19150f;color:#d4aa67}.main{flex:1;min-width:0}.top{height:72px;border-bottom:1px solid #202020;display:flex;align-items:center;justify-content:space-between;padding:0 32px}.crumb{color:#777;font-size:13px}.user{display:flex;align-items:center;gap:11px;font-size:13px}.avatar{width:34px;height:34px;border-radius:50%;background:#1e1e1e;border:1px solid #333;display:grid;place-items:center;color:#c89c58;font-weight:800}.content{max-width:1050px;margin:auto;padding:38px 32px 70px}.head{margin-bottom:27px}.kicker{font-size:10px;letter-spacing:.22em;color:#c89c58;font-weight:800}.head h1{font-size:34px;letter-spacing:-.02em;margin:9px 0 5px}.muted{color:#666;font-size:12px}.layout{display:grid;grid-template-columns:210px 1fr;gap:22px}.tabs{background:#101010;border:1px solid #242424;border-radius:14px;padding:8px;height:max-content}.tab{width:100%;text-align:left;border:0;background:transparent;color:#777;padding:12px 13px;border-radius:8px;font-size:12px;cursor:pointer}.tab.active,.tab:hover{background:#19150f;color:#d4aa67}.panel{background:#101010;border:1px solid #242424;border-radius:15px;padding:23px;margin-bottom:14px}.panel h2{font-size:15px;margin:0 0 5px}.desc{color:#666;font-size:11px;margin:0 0 21px}.field{padding:15px 0;border-top:1px solid #202020;display:flex;justify-content:space-between;gap:25px;align-items:center}.field:first-of-type{border-top:0}.field b{font-size:12px;font-weight:600}.field small{display:block;color:#666;font-size:10px;margin-top:4px}.control{min-width:220px}.input,.select{width:100%;padding:11px 12px;border:1px solid #292929;border-radius:9px;background:#0b0b0b;color:#eee;outline:none;font:12px inherit}.input:focus,.select:focus{border-color:#5a452b}.switch{width:42px;height:24px;border-radius:20px;background:#292929;border:1px solid #363636;padding:2px;cursor:pointer}.switch:after{content:"";display:block;width:18px;height:18px;border-radius:50%;background:#777;transition:.2s}.switch.on{background:#4a3925}.switch.on:after{margin-left:18px;background:#c89c58}.save{border:0;border-radius:10px;background:#c89c58;color:#111;padding:12px 18px;font-weight:800;cursor:pointer}.footer{display:flex;justify-content:flex-end;margin-top:5px}.danger{border-color:#382323}.danger .desc{margin-bottom:0}.dangerBtn{border:1px solid #432828;background:#150c0c;color:#b67c7c;border-radius:9px;padding:10px 13px;font-size:11px}
+@media(max-width:800px){.side{width:190px}.layout{grid-template-columns:1fr}.tabs{display:flex;overflow:auto}.tab{white-space:nowrap;width:auto}.field{align-items:flex-start;flex-direction:column}.control{width:100%;min-width:0}}
+@media(max-width:650px){.side{display:none}.top{padding:0 18px}.content{padding:25px 15px}.head h1{font-size:30px}}
+</style>
+<link rel="stylesheet" href="design-system.css"><script src="flowly-config.js"></script></head>
+<body>
+<div class="app">
+<aside class="side"><a class="logo" href="index.html">FLOW<i>LY</i></a>
+<div class="section">WORKSPACE</div><a class="nav" href="dashboard.html">⌂ &nbsp; Dashboard</a><a class="nav" href="booking.html">◷ &nbsp; Booking</a><a class="nav" href="customers.html">◯ &nbsp; Customers</a>
+<div class="section">INSIGHTS</div><a class="nav" href="business-data.html">▥ &nbsp; Business Data</a><a class="nav" href="ai-assistant.html">✦ &nbsp; AI Assistant</a>
+<div class="section">SYSTEM</div><a class="nav active" href="settings.html">⚙ &nbsp; Settings</a></aside>
+<main class="main"><header class="top"><span class="crumb">Workspace / Settings</span><div class="user"><span>Demo Business</span><div class="avatar">D</div></div></header>
+<section class="content">
+<div class="head"><div class="kicker">WORKSPACE SETTINGS</div><h1>ตั้งค่าระบบ</h1><div class="muted">จัดการข้อมูลและประสบการณ์การใช้งานของ Workspace</div></div>
+<div class="layout">
+<div class="tabs"><button class="tab active">General</button><button class="tab">Profile</button><button class="tab">Notifications</button><button class="tab">Appearance</button><button class="tab">Security</button></div>
+<div>
+<div class="panel"><h2>ข้อมูลธุรกิจ</h2><p class="desc">ข้อมูลพื้นฐานที่ใช้แสดงใน Workspace</p>
+<div class="field"><div><b>ชื่อธุรกิจ</b><small>ชื่อที่จะแสดงในระบบ</small></div><div class="control"><input class="input" value="Demo Business"></div></div>
+<div class="field"><div><b>อีเมลธุรกิจ</b><small>ใช้สำหรับการติดต่อ</small></div><div class="control"><input class="input" value="hello@example.com"></div></div>
+<div class="field"><div><b>ภาษา</b><small>ภาษาหลักของ Workspace</small></div><div class="control"><select class="select"><option>ภาษาไทย</option><option>English</option></select></div></div>
+</div>
+<div class="panel"><h2>การแจ้งเตือน</h2><p class="desc">กำหนดประเภทการแจ้งเตือนที่ต้องการรับ</p>
+<div class="field"><div><b>Booking ใหม่</b><small>แจ้งเตือนเมื่อมีรายการใหม่</small></div><button class="switch on"></button></div>
+<div class="field"><div><b>สรุปประจำวัน</b><small>รับภาพรวมธุรกิจในแต่ละวัน</small></div><button class="switch"></button></div>
+<div class="field"><div><b>AI Insights</b><small>แจ้งเมื่อมี Insight ที่น่าสนใจ</small></div><button class="switch on"></button></div>
+</div>
+<div class="panel"><h2>Appearance</h2><p class="desc">รูปแบบการแสดงผลของ FLOWLY</p>
+<div class="field"><div><b>Theme</b><small>ธีมที่ใช้กับ Workspace</small></div><div class="control"><select class="select"><option>Dark Premium</option><option>System</option><option>Light</option></select></div></div>
+</div>
+<div class="panel danger"><h2>Danger Zone</h2><p class="desc">V1 Preview · ยังไม่มีการเชื่อมต่อระบบจริง</p><div class="footer"><button class="dangerBtn">ลบบัญชี Workspace</button></div></div>
+<div class="footer"><button class="save" id="save">บันทึกการตั้งค่า</button></div>
+</div></div>
+</section>
+<section id="businessProfileDemo" class="panel" style="margin-top:18px;">
+  <div class="kicker">BUSINESS PROFILE</div>
+  <h2 style="margin:6px 0 4px;">ข้อมูลธุรกิจ</h2>
+  <p style="margin:0 0 14px;">ข้อมูล Demo สำหรับแสดงชื่อธุรกิจในระบบ</p>
+  <div style="display:grid;gap:10px;max-width:520px">
+    <label>ชื่อธุรกิจ</label>
+    <input id="businessNameDemo" placeholder="เช่น FLOWLY Studio">
+    <label>เบอร์ติดต่อ</label>
+    <input id="businessPhoneDemo" placeholder="เช่น 02-000-0000">
+    <button id="saveBusinessDemo" class="btn">บันทึกข้อมูล Demo</button>
+    <div id="businessDemoMessage" aria-live="polite" style="font-size:11px;color:#777"></div>
+  </div>
+</section>
+</main></div>
+<script>
+document.querySelectorAll('.switch').forEach(s=>s.onclick=()=>s.classList.toggle('on'));
+document.getElementById('save').onclick=()=>alert('บันทึก Demo สำเร็จ — ยังไม่ได้เชื่อมฐานข้อมูลจริง');
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));t.classList.add('active')});
+</script>
+
+<script>
+(function(){
+  const KEY='flowly_demo_business_v1';
+  const name=document.getElementById('businessNameDemo');
+  const phone=document.getElementById('businessPhoneDemo');
+  const save=document.getElementById('saveBusinessDemo');
+  const msg=document.getElementById('businessDemoMessage');
+  if(!name||!phone||!save||!msg) return;
+  function load(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){return{}}}
+  const data=load(); name.value=data.name||''; phone.value=data.phone||'';
+  save.onclick=()=>{
+    if(!name.value.trim()){msg.textContent='กรุณากรอกชื่อธุรกิจ';name.focus();return}
+    localStorage.setItem(KEY,JSON.stringify({name:name.value.trim(),phone:phone.value.trim()}));
+    msg.textContent='บันทึกข้อมูล Demo แล้ว';
+  };
+})();
+</script>
+</body></html>

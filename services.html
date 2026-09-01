@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FLOWLY · Services</title>
+<style>
+body{margin:0;background:#090909;color:#eee;font-family:Arial,sans-serif}
+.wrap{max-width:900px;margin:auto;padding:34px 20px}
+.kicker{font-size:10px;letter-spacing:.16em;color:#777}
+h1{margin:7px 0 4px;font-size:28px}.sub{color:#888;font-size:12px}
+.panel{margin-top:20px;padding:18px;border:1px solid #242424;border-radius:16px;background:#0e0e0e}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+label{font-size:10px;color:#888;display:block;margin-bottom:5px}
+input{width:100%;box-sizing:border-box;background:#101010;color:#eee;border:1px solid #292929;border-radius:9px;padding:10px}
+button{border:1px solid #333;background:#eee;color:#111;border-radius:9px;padding:10px 14px;cursor:pointer}
+button.secondary{background:#151515;color:#eee}
+.actions{display:flex;gap:8px;margin-top:12px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:14px 0;border-top:1px solid #222}
+.name{font-weight:700;font-size:13px}.meta{font-size:10px;color:#777;margin-top:4px}
+@media(max-width:650px){.grid{grid-template-columns:1fr}}
+</style>
+<script src="flowly-config.js"></script></head>
+<body>
+<div class="wrap">
+<div class="kicker">FLOWLY / SERVICES</div>
+<h1>บริการ</h1>
+<div class="sub">จัดการรายการบริการ ราคา และระยะเวลา</div>
+
+<section class="panel">
+  <div class="kicker">ADD SERVICE</div>
+  <div class="grid" style="margin-top:12px">
+    <div><label>ชื่อบริการ</label><input id="sName" placeholder="เช่น บริการมาตรฐาน"></div>
+    <div><label>ระยะเวลา (นาที)</label><input id="sDuration" type="number" min="1" placeholder="60"></div>
+    <div><label>ราคา</label><input id="sPrice" type="number" min="0" step="0.01" placeholder="800"></div>
+  </div>
+  <div class="actions"><button id="add">เพิ่มบริการ</button><span id="msg" aria-live="polite" class="meta"></span></div>
+</section>
+
+<section class="panel">
+  <div class="kicker">SERVICE LIST</div>
+  <div id="list" style="margin-top:5px"><div class="meta">กำลังโหลด...</div></div>
+</section>
+</div>
+<script>
+(function(){
+ const API=window.FLOWLY_API_BASE||"";
+ const list=document.getElementById("list"),msg=document.getElementById("msg");
+ const esc=v=>String(v??"").replace(/[<>&"]/g,"");
+ let rows=[];
+ async function call(path,opt={}){const r=await fetch(API+path,{credentials:"include",headers:{"Content-Type":"application/json",...(opt.headers||{})},...opt});const b=await r.json().catch(()=>({}));if(!r.ok)throw Error(b?.error?.message||"เกิดข้อผิดพลาด");return b.data}
+ async function load(){try{rows=await call("/api/v1/services");list.innerHTML=rows.map(x=>`<div class="row"><div><div class="name">${esc(x.name)}</div><div class="meta">${esc(x.duration_minutes)} นาที · ฿${Number(x.price).toLocaleString("th-TH",{minimumFractionDigits:2})} · ${x.active?"เปิดใช้งาน":"ปิดใช้งาน"}</div></div><div class="actions"><button class="secondary" data-edit="${esc(x.id)}">แก้ไข</button><button class="secondary" data-del="${esc(x.id)}">ลบ</button></div></div>`).join("")||'<div class="meta">ยังไม่มีบริการ</div>'}catch(e){list.innerHTML='<div class="meta">ต้องเข้าสู่ระบบและเชื่อม API ก่อน</div>'}}
+ document.getElementById("add").onclick=async()=>{const name=sName.value.trim(),duration=Number(sDuration.value),price=Number(sPrice.value);if(!name||!Number.isInteger(duration)||duration<1||!Number.isFinite(price)||price<0){msg.textContent="กรอกข้อมูลให้ครบและถูกต้อง";return}try{await call("/api/v1/services",{method:"POST",body:JSON.stringify({name,duration_minutes:duration,price})});sName.value=sDuration.value=sPrice.value="";msg.textContent="เพิ่มบริการแล้ว";load()}catch(e){msg.textContent=e.message}}
+ list.onclick=async e=>{const edit=e.target.closest("[data-edit]"),del=e.target.closest("[data-del]");if(edit){const x=rows.find(r=>r.id===edit.dataset.edit);if(!x)return;const name=prompt("ชื่อบริการ",x.name);if(name===null)return;const duration=Number(prompt("ระยะเวลา (นาที)",x.duration_minutes));if(!Number.isInteger(duration)||duration<1)return;const price=Number(prompt("ราคา",x.price));if(!Number.isFinite(price)||price<0)return;try{await call("/api/v1/services/"+encodeURIComponent(x.id),{method:"PUT",body:JSON.stringify({name,duration_minutes:duration,price,active:x.active})});load()}catch(err){alert(err.message)}}if(del){const x=rows.find(r=>r.id===del.dataset.del);if(!x)return;if(!confirm("ยืนยันลบบริการนี้?"))return;try{await call("/api/v1/services/"+encodeURIComponent(x.id),{method:"DELETE"});load()}catch(err){alert(err.message)}}};
+ load();
+})();
+</script>
+</body></html>

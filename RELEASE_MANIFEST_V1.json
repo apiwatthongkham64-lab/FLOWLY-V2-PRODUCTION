@@ -1,0 +1,25 @@
+{
+  "name": "FLOWLY",
+  "release": "V1 Integration Candidate",
+  "backend": "backend/server.js",
+  "database_schema": "DATABASE_SCHEMA_V1.sql",
+  "frontend_config": "flowly-config.js",
+  "core_flow": [
+    "auth",
+    "customers",
+    "services",
+    "bookings",
+    "booking_status",
+    "calendar",
+    "dashboard",
+    "revenue",
+    "today"
+  ],
+  "runtime_verified": false,
+  "runtime_verification_requires": [
+    "PostgreSQL",
+    "Node.js",
+    "npm install",
+    "npm start"
+  ]
+}

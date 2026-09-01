@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FLOWLY · Calendar</title>
+<style>
+body{margin:0;background:#090909;color:#eee;font-family:Arial,sans-serif}
+.wrap{max-width:1000px;margin:auto;padding:30px 20px}.k{font-size:10px;color:#777;letter-spacing:.15em}
+h1{margin:8px 0 4px}.sub{font-size:12px;color:#888}
+.toolbar{display:flex;gap:8px;align-items:center;margin:18px 0}.toolbar button,.toolbar input{background:#111;color:#eee;border:1px solid #292929;border-radius:9px;padding:9px 12px}
+.panel{border:1px solid #242424;border-radius:15px;background:#0e0e0e;overflow:hidden}
+.head{display:grid;grid-template-columns:repeat(7,1fr);border-bottom:1px solid #222}
+.head div{padding:10px;font-size:10px;color:#777;text-align:center}
+.grid{display:grid;grid-template-columns:repeat(7,1fr)}
+.day{min-height:120px;padding:8px;border-right:1px solid #222;border-bottom:1px solid #222;box-sizing:border-box}
+.num{font-size:11px;color:#777;margin-bottom:8px}.event{font-size:10px;padding:7px;margin:4px 0;border:1px solid #292929;border-radius:7px;background:#151515}
+.event b{font-size:10px}.event small{display:block;color:#777;margin-top:3px}
+.empty{color:#444;font-size:10px}
+@media(max-width:650px){.day{min-height:90px;padding:5px}.event{font-size:9px;padding:5px}.head div{font-size:9px}}
+</style>
+<script src="flowly-config.js"></script></head>
+<body><div class="wrap">
+<div class="k">FLOWLY / CALENDAR</div><h1>ตารางนัดหมาย</h1><div class="sub">มุมมองรายเดือนสำหรับ Booking</div>
+<div class="toolbar"><button id="prev">‹</button><input id="month" type="month"><button id="next">›</button><span id="msg" class="sub"></span></div>
+<div class="panel"><div class="head"><div>อาทิตย์</div><div>จันทร์</div><div>อังคาร</div><div>พุธ</div><div>พฤหัสบดี</div><div>ศุกร์</div><div>เสาร์</div></div><div id="grid" class="grid"></div></div>
+</div>
+<script>
+(async function(){
+const API=window.FLOWLY_API_BASE||"",grid=document.getElementById("grid"),month=document.getElementById("month"),msg=document.getElementById("msg");
+const esc=v=>String(v??"").replace(/[<>&"]/g,"");
+const now=new Date(); month.value=now.toISOString().slice(0,7);
+async function call(p){const r=await fetch(API+p,{credentials:"include"});const b=await r.json().catch(()=>({}));if(!r.ok)throw Error(b?.error?.message||"เกิดข้อผิดพลาด");return b.data}
+function render(rows){
+ const [y,m]=month.value.split("-").map(Number),first=new Date(y,m-1,1),last=new Date(y,m,0);
+ const cells=[];for(let i=0;i<first.getDay();i++)cells.push(null);
+ for(let d=1;d<=last.getDate();d++)cells.push(d);
+ while(cells.length%7)cells.push(null);
+ grid.innerHTML=cells.map(d=>{
+  if(!d)return '<div class="day"></div>';
+  const date=`${y}-${String(m).padStart(2,"0")}-${String(d).padStart(2,"0")}`;
+  const events=rows.filter(x=>x.booking_date===date);
+  return `<div class="day"><div class="num">${d}</div>${events.map(x=>`<div class="event"><b>${esc(x.booking_time)}</b> · ${esc(x.customer_name||x.customer_id)}<small>${esc(x.service_name||x.service_id)} · ${esc(x.status)}</small></div>`).join("")||'<div class="empty">—</div>'}</div>`;
+ }).join("");
+}
+async function load(){msg.textContent="กำลังโหลด...";try{const rows=await call("/api/v1/bookings");render(rows);msg.textContent=""}catch(e){msg.textContent=e.message;grid.innerHTML=""}}
+document.getElementById("prev").onclick=()=>{const [y,m]=month.value.split("-").map(Number);const d=new Date(y,m-2,1);month.value=d.toISOString().slice(0,7);load()};
+document.getElementById("next").onclick=()=>{const [y,m]=month.value.split("-").map(Number);const d=new Date(y,m,1);month.value=d.toISOString().slice(0,7);load()};
+month.onchange=load;load();
+})();
+</script></body></html>

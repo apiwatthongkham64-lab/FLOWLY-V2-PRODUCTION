@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dashboard — FLOWLY</title>
+
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#080808;color:#f5f2ec;font-family:Inter,"Noto Sans Thai",Arial,sans-serif}
+.app{min-height:100vh;display:flex}
+.side{width:235px;background:#0d0d0d;border-right:1px solid #202020;padding:25px 16px;flex-shrink:0}
+.logo{font-size:23px;letter-spacing:.2em;font-weight:800;padding:0 12px 28px;display:block;color:#f5f2ec;text-decoration:none}
+.logo i{font-style:normal;color:#c89c58}
+.section{font-size:10px;color:#555;letter-spacing:.15em;padding:18px 12px 8px}
+.nav{display:block;padding:11px 12px;border-radius:9px;color:#888;font-size:13px;margin:2px 0;text-decoration:none}
+.nav:hover,.nav.active{background:#19150f;color:#d4aa67}
+.bottom{margin-top:70px;border-top:1px solid #202020;padding-top:15px}
+.main{flex:1;min-width:0}
+.top{height:72px;border-bottom:1px solid #202020;display:flex;align-items:center;justify-content:space-between;padding:0 32px}
+.crumb{color:#777;font-size:13px}
+.user{display:flex;align-items:center;gap:11px;font-size:13px}
+.avatar{width:34px;height:34px;border-radius:50%;background:#1e1e1e;border:1px solid #333;display:grid;place-items:center;color:#c89c58;font-weight:800}
+.content{max-width:1250px;margin:auto;padding:38px 32px 70px}
+.welcome{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:28px}
+.kicker{font-size:11px;letter-spacing:.18em;color:#c89c58;font-weight:800}
+.welcome h1{font-size:34px;margin:8px 0 0}
+.date{color:#666;font-size:12px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.card,.panel{background:#101010;border:1px solid #242424;border-radius:15px}
+.card{padding:20px}
+.label{font-size:12px;color:#777}
+.value{font-size:29px;font-weight:800;margin:8px 0}
+.delta{font-size:11px;color:#8e8e8e}
+.gold{color:#c89c58}
+.mainGrid{display:grid;grid-template-columns:1.55fr .85fr;gap:15px;margin-top:15px}
+.panel{padding:22px}
+.panelHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.panelHead b{font-size:15px}
+.panelHead span{color:#666;font-size:11px}
+.chart{height:230px;border:1px solid #202020;border-radius:12px;padding:18px;overflow:hidden}
+.chart svg{width:100%;height:100%}
+.schedule{display:grid;gap:8px}
+.event{display:flex;gap:14px;padding:13px;border:1px solid #202020;border-radius:10px}
+.time{color:#c89c58;font-size:12px;width:45px}
+.event b{font-size:13px}
+.event small{display:block;color:#666;margin-top:2px}
+.quick{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:15px}
+.quick a{padding:14px;border:1px solid #252525;border-radius:10px;color:#aaa;font-size:12px;text-align:center;text-decoration:none}
+.quick a:hover{border-color:#c89c58;color:#d4aa67}
+.status{margin-top:12px;padding:12px 14px;border:1px solid #202020;border-radius:11px;background:#0b0b0b;font-size:11px;color:#777}
+.liveGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+.liveBox{padding:12px;border:1px solid #222;border-radius:10px;background:#0e0e0e}
+.liveLabel{font-size:10px;color:#777}
+.liveValue{font-size:22px;font-weight:700;margin-top:4px}
+.revenueValue{font-size:24px;font-weight:700;margin-top:10px}
+.meta,.muted{font-size:10px;color:#777}
+.trend{margin-top:12px;display:flex;gap:3px;align-items:flex-end;height:130px;overflow-x:auto}
+.bar{min-width:9px;border-radius:3px 3px 0 0;background:#c89c58}
+.bookingList{display:grid;gap:8px;margin-top:12px}
+.bookingRow{display:flex;justify-content:space-between;gap:10px;padding:11px 0;border-top:1px solid #222}
+.empty{font-size:11px;color:#777;padding:8px 0}
+.error{font-size:11px;color:#c97b58;padding:8px 0}
+@media(max-width:950px){
+  .side{width:190px}
+  .grid{grid-template-columns:1fr 1fr}
+  .mainGrid{grid-template-columns:1fr}
+  .liveGrid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:650px){
+  .side{display:none}
+  .top{padding:0 18px}
+  .content{padding:28px 18px}
+  .welcome{display:block}
+  .date{margin-top:8px}
+  .grid{grid-template-columns:1fr 1fr}
+  .value{font-size:24px}
+}
+</style>
+
+<script src="flowly-config.js"></script>
+</head>
+
+<body>
+<div class="app">
+
+<aside class="side">
+  <a class="logo" href="index.html">FLOW<i>LY</i></a>
+
+  <div class="section">WORKSPACE</div>
+  <a class="nav active" href="dashboard.html">◌ &nbsp; Dashboard</a>
+  <a class="nav" href="booking.html">▸ &nbsp; Booking</a>
+  <a class="nav" href="customers.html">▸ &nbsp; Customers</a>
+
+  <div class="section">INSIGHTS</div>
+  <a class="nav" href="business-data.html">▸ &nbsp; Business Data</a>
+  <a class="nav" href="ai-assistant.html">✦ &nbsp; AI Assistant</a>
+
+  <div class="section">SYSTEM</div>
+  <a class="nav" href="settings.html">⚙ &nbsp; Settings</a>
+
+  <div class="bottom">
+    <a class="nav" href="index.html">← &nbsp; กลับหน้าเว็บไซต์หลัก</a>
+    <a class="nav" href="login.html">↪ &nbsp; ออกจากระบบ</a>
+  </div>
+</aside>
+
+<main class="main">
+
+<header class="top">
+  <span class="crumb">Workspace / Dashboard</span>
+  <div class="user">
+    <span>FLOWLY Business</span>
+    <div class="avatar">F</div>
+  </div>
+</header>
+
+<section class="content">
+
+  <div class="welcome">
+    <div>
+      <div class="kicker">BUSINESS OVERVIEW</div>
+      <h1>ภาพรวมธุรกิจ 👋</h1>
+    </div>
+    <div class="date" id="todayDate">—</div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <div class="label">Today's Revenue</div>
+      <div class="value" id="todayRevenue">฿0.00</div>
+      <div class="delta gold">จากข้อมูลการจองจริง</div>
+    </div>
+
+    <div class="card">
+      <div class="label">Today's Bookings</div>
+      <div class="value" id="todayBookings">0</div>
+      <div class="delta" id="bookingDelta">กำลังโหลด...</div>
+    </div>
+
+    <div class="card">
+      <div class="label">Customers</div>
+      <div class="value" id="customers">0</div>
+      <div class="delta">จากฐานข้อมูลจริง</div>
+    </div>
+
+    <div class="card">
+      <div class="label">Active Services</div>
+      <div class="value" id="activeServices">0</div>
+      <div class="delta">บริการที่เปิดใช้งาน</div>
+    </div>
+  </div>
+
+  <div class="mainGrid">
+
+    <div class="panel">
+      <div class="panelHead">
+        <b>Revenue Overview</b>
+        <span>Last 30 days</span>
+      </div>
+      <div class="chart">
+        <svg id="revenueChart" viewBox="0 0 700 220" preserveAspectRatio="none"></svg>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panelHead">
+        <b>Today's Schedule</b>
+        <span id="scheduleCount">0 bookings</span>
+      </div>
+      <div class="schedule" id="schedule">
+        <div class="empty">กำลังโหลด...</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="panel" style="margin-top:15px">
+    <div class="panelHead">
+      <b>Quick Actions</b>
+      <span>Start here</span>
+    </div>
+
+    <div class="quick">
+      <a href="booking.html">✚ New Booking</a>
+      <a href="customers.html">✚ Customer</a>
+      <a href="ai-assistant.html">✦ Ask AI</a>
+      <a href="business-data.html">▸ View Reports</a>
+    </div>
+  </div>
+
+  <div class="status" id="status">
+    กำลังเชื่อมต่อ PostgreSQL → API → Dashboard...
+  </div>
+
+  <section class="panel" style="margin-top:18px">
+    <div class="kicker">LIVE BUSINESS DATA</div>
+
+    <div class="liveGrid">
+      <div class="liveBox">
+        <div class="liveLabel">ลูกค้าทั้งหมด</div>
+        <div class="liveValue" id="liveCustomers">0</div>
+      </div>
+
+      <div class="liveBox">
+        <div class="liveLabel">บริการที่เปิด</div>
+        <div class="liveValue" id="liveServices">0</div>
+      </div>
+
+      <div class="liveBox">
+        <div class="liveLabel">นัดหมายวันนี้</div>
+        <div class="liveValue" id="liveToday">0</div>
+      </div>
+
+      <div class="liveBox">
+        <div class="liveLabel">นัดหมาย 7 วัน</div>
+        <div class="liveValue" id="liveUpcoming">0</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" style="margin-top:18px">
+    <div class="kicker">REVENUE — LAST 30 DAYS</div>
+    <div class="revenueValue" id="revenue30">฿0.00</div>
+    <div class="meta" id="revenueMeta">กำลังโหลด...</div>
+  </section>
+
+  <section class="panel" style="margin-top:18px">
+    <div class="kicker">DAILY REVENUE — LAST 30 DAYS</div>
+    <div class="trend" id="trend">
+      <div class="empty">กำลังโหลด...</div>
+    </div>
+  </section>
+
+  <section class="panel" style="margin-top:18px">
+    <div class="kicker">TODAY</div>
+    <div class="bookingList" id="todayList">
+      <div class="empty">กำลังโหลด...</div>
+    </div>
+  </section>
+
+</section>
+</main>
+</div>
+
+<script>
+(function(){
+
+  const API = window.FLOWLY_API_BASE || "";
+
+  const $ = id => document.getElementById(id);
+
+  const money = value =>
+    "฿" + Number(value || 0).toLocaleString("th-TH", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+
+  const num = value =>
+    Number(value || 0).toLocaleString("th-TH");
+
+  const esc = value =>
+    String(value ?? "").replace(/[<>&"]/g, "");
+
+  $("todayDate").textContent =
+    new Intl.DateTimeFormat("th-TH", {
+      weekday:"long",
+      day:"numeric",
+      month:"long",
+      year:"numeric"
+    }).format(new Date());
+
+  async function get(path){
+    const r = await fetch(API + path, {
+      credentials:"include"
+    });
+
+    const b = await r.json();
+
+    if(!r.ok || b.error){
+      throw new Error(
+        b.error?.message || "API error " + r.status
+      );
+    }
+
+    return b.data;
+  }
+
+  function drawChart(rows){
+
+    const svg = $("revenueChart");
+
+    if(!rows || !rows.length){
+      svg.innerHTML = "";
+      return;
+    }
+
+    const vals = rows.map(x => Number(x.revenue) || 0);
+    const max = Math.max(1, ...vals);
+    const w = 700;
+    const h = 220;
+    const p = 10;
+
+    const pts = vals.map((v,i) => [
+      rows.length === 1
+        ? w / 2
+        : p + i * (w - 2*p) / Math.max(1, rows.length - 1),
+
+      h - p - (v / max) * (h - 2*p)
+    ]);
+
+    if(rows.length === 1){
+
+      const x = pts[0][0];
+      const y = pts[0][1];
+
+      svg.innerHTML =
+        '<circle cx="' + x + '" cy="' + y + '" r="7" fill="#c89c58"></circle>' +
+        '<line x1="' + p + '" y1="' + y +
+        '" x2="' + (w-p) + '" y2="' + y +
+        '" stroke="#c89c58" stroke-width="2" opacity=".25"></line>';
+
+      return;
+    }
+
+    const d = pts.map((q,i) =>
+      (i ? "L" : "M") +
+      q[0].toFixed(1) + " " +
+      q[1].toFixed(1)
+    ).join(" ");
+
+    const last = pts[pts.length - 1];
+    const first = pts[0];
+
+    const area =
+      d +
+      " L " + last[0] + " " + h +
+      " L " + first[0] + " " + h +
+      " Z";
+
+    svg.innerHTML =
+      '<path d="' + area +
+      '" fill="#c89c58" opacity=".06"></path>' +
+
+      '<path d="' + d +
+      '" fill="none" stroke="#c89c58" stroke-width="4"></path>';
+  }
+
+  function renderTrend(rows){
+
+    const el = $("trend");
+
+    if(!rows || !rows.length){
+      el.innerHTML =
+        '<div class="empty">ยังไม่มีข้อมูลรายได้ในช่วง 30 วัน</div>';
+      return;
+    }
+
+    const values = rows.map(x => Number(x.revenue) || 0);
+    const max = Math.max(1, ...values);
+
+    el.innerHTML = rows.map(x => {
+
+      const v = Number(x.revenue) || 0;
+      const h = Math.max(4, Math.round((v / max) * 105));
+
+      return '<div class="bar" title="' +
+        esc(x.date) + ' — ' + money(v) +
+        '" style="height:' + h + 'px"></div>';
+
+    }).join("");
+  }
+
+  function renderSchedule(rows){
+
+    const schedule = $("schedule");
+    const todayList = $("todayList");
+
+    if(!rows || !rows.length){
+
+      $("scheduleCount").textContent = "0 bookings";
+
+      schedule.innerHTML =
+        '<div class="empty">ไม่มีนัดหมายวันนี้</div>';
+
+      todayList.innerHTML =
+        '<div class="empty">ไม่มีนัดหมายวันนี้</div>';
+
+      return;
+    }
+
+    $("scheduleCount").textContent =
+      num(rows.length) + " bookings";
+
+    schedule.innerHTML = rows.map(x => {
+
+      const time =
+        String(x.booking_time || "").slice(0,5);
+
+      const customer =
+        esc(x.customer_name || "ลูกค้า");
+
+      const service =
+        esc(x.service_name || "บริการ");
+
+      const status =
+        esc(x.status || "");
+
+      return '<div class="event">' +
+        '<div class="time">' + time + '</div>' +
+        '<div>' +
+        '<b>' + customer + '</b>' +
+        '<small>' + status + ' · ' + service + '</small>' +
+        '</div>' +
+        '</div>';
+
+    }).join("");
+
+    todayList.innerHTML = rows.map(x => {
+
+      const time =
+        String(x.booking_time || "").slice(0,5);
+
+      const customer =
+        esc(x.customer_name || "ลูกค้า");
+
+      const service =
+        esc(x.service_name || "บริการ");
+
+      const status =
+        esc(x.status || "");
+
+      return '<div class="bookingRow">' +
+        '<div>' +
+        '<b>' + customer + '</b>' +
+        '<div class="muted">' + service + '</div>' +
+        '</div>' +
+        '<div class="muted">' +
+        time + ' · ' + status +
+        '</div>' +
+        '</div>';
+
+    }).join("");
+  }
+
+  async function load(){
+
+    $("status").textContent =
+      "กำลังโหลดข้อมูลจาก PostgreSQL → API...";
+
+    try{
+
+      const summary =
+        await get("/api/v1/dashboard/summary");
+
+      $("customers").textContent =
+        num(summary.customers);
+
+      $("activeServices").textContent =
+        num(summary.active_services);
+
+      $("todayBookings").textContent =
+        num(summary.today_bookings);
+
+      $("liveCustomers").textContent =
+        num(summary.customers);
+
+      $("liveServices").textContent =
+        num(summary.active_services);
+
+      $("liveToday").textContent =
+        num(summary.today_bookings);
+
+      $("liveUpcoming").textContent =
+        num(summary.upcoming_bookings);
+
+      $("bookingDelta").textContent =
+        num(summary.upcoming_bookings) +
+        " รายการใน 7 วันข้างหน้า";
+
+      const revenue =
+        await get("/api/v1/dashboard/revenue");
+
+      $("revenue30").textContent =
+        money(revenue.confirmed_revenue);
+
+      $("todayRevenue").textContent =
+        money(revenue.confirmed_revenue);
+
+      $("revenueMeta").textContent =
+        "Completed " +
+        num(revenue.completed_bookings) +
+        " bookings • Confirmed + Completed " +
+        money(revenue.confirmed_revenue);
+
+      const trend =
+        await get("/api/v1/dashboard/revenue/trend");
+
+      drawChart(trend);
+      renderTrend(trend);
+
+      const today =
+        await get("/api/v1/dashboard/today");
+
+      renderSchedule(today);
+
+      $("status").textContent =
+        "เชื่อมต่อสำเร็จ • PostgreSQL → API → Dashboard";
+
+    }catch(error){
+
+      console.error(error);
+
+      $("status").textContent =
+        "ไม่สามารถโหลดข้อมูล Dashboard ได้: " +
+        error.message;
+
+    }
+  }
+
+  load();
+
+})();
+</script>
+
+</body>
+</html>

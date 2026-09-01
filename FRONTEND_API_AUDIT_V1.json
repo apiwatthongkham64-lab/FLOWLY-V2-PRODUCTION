@@ -1,0 +1,102 @@
+{
+  "status": "PASS",
+  "note": "Static frontend/API audit; dynamic :id paths normalized and auth cookie credentials verified.",
+  "pages": [
+    {
+      "file": "ai-assistant.html",
+      "api_calls": [],
+      "unmatched": [],
+      "credentials_include": false
+    },
+    {
+      "file": "booking-api.html",
+      "api_calls": [
+        "/api/v1/customers",
+        "/api/v1/services",
+        "/api/v1/bookings",
+        "/api/v1/bookings/",
+        "/api/v1/bookings"
+      ],
+      "unmatched": [],
+      "credentials_include": true
+    },
+    {
+      "file": "booking.html",
+      "api_calls": [],
+      "unmatched": [],
+      "credentials_include": false
+    },
+    {
+      "file": "business-data.html",
+      "api_calls": [],
+      "unmatched": [],
+      "credentials_include": false
+    },
+    {
+      "file": "calendar.html",
+      "api_calls": [
+        "/api/v1/bookings"
+      ],
+      "unmatched": [],
+      "credentials_include": true
+    },
+    {
+      "file": "customers.html",
+      "api_calls": [],
+      "unmatched": [],
+      "credentials_include": true
+    },
+    {
+      "file": "dashboard.html",
+      "api_calls": [],
+      "unmatched": [],
+      "credentials_include": true
+    },
+    {
+      "file": "index.html",
+      "api_calls": [],
+      "unmatched": [],
+      "credentials_include": false
+    },
+    {
+      "file": "login.html",
+      "api_calls": [
+        "/api/v1/auth/login"
+      ],
+      "unmatched": [],
+      "credentials_include": true
+    },
+    {
+      "file": "register.html",
+      "api_calls": [
+        "/api/v1/auth/register"
+      ],
+      "unmatched": [],
+      "credentials_include": true
+    },
+    {
+      "file": "services.html",
+      "api_calls": [
+        "/api/v1/services",
+        "/api/v1/services",
+        "/api/v1/services/",
+        "/api/v1/services/"
+      ],
+      "unmatched": [],
+      "credentials_include": true
+    },
+    {
+      "file": "settings.html",
+      "api_calls": [],
+      "unmatched": [],
+      "credentials_include": false
+    },
+    {
+      "file": "test-launcher.html",
+      "api_calls": [],
+      "unmatched": [],
+      "credentials_include": false
+    }
+  ],
+  "frontend_secret_hits": []
+}

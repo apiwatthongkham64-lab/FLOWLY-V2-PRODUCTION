@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>สร้างบัญชี — FLOWLY</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#080808;color:#f5f2ec;font-family:Inter,"Noto Sans Thai",Arial,sans-serif}
+a{text-decoration:none;color:inherit}.nav{border-bottom:1px solid #202020;background:#080808}.navin{max-width:1180px;height:74px;margin:auto;padding:0 26px;display:flex;align-items:center;justify-content:space-between}.logo{font-size:25px;letter-spacing:.2em;font-weight:800}.logo i{font-style:normal;color:#c89c58}.navin span{color:#777;font-size:13px}.navin a:last-child{color:#c89c58}
+.wrap{max-width:980px;margin:auto;padding:75px 26px 110px}.head{text-align:center;max-width:700px;margin:auto}.kicker{font-size:12px;letter-spacing:.2em;color:#c89c58;font-weight:800}.head h1{font-size:clamp(38px,5vw,58px);line-height:1.08;margin:15px 0}.head p{color:#888;margin:0}
+.progress{display:flex;justify-content:center;gap:8px;margin:35px 0 45px}.bar{width:70px;height:4px;border-radius:5px;background:#292929}.bar.active{background:#c89c58}
+.panel{max-width:560px;margin:auto;border:1px solid #252525;background:#101010;border-radius:18px;padding:30px}.panel h2{margin:0 0 5px;font-size:23px}.muted{color:#777;font-size:13px;margin:0 0 25px}
+label{display:block;color:#aaa;font-size:13px;margin:16px 0 7px}input{width:100%;padding:14px;border:1px solid #2b2b2b;border-radius:10px;background:#0b0b0b;color:#fff;outline:none}input:focus{border-color:#c89c58}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.check{display:flex;gap:9px;align-items:flex-start;color:#777;font-size:12px;margin-top:18px}.check input{width:auto;margin-top:3px}.btn{width:100%;border:0;border-radius:10px;padding:14px;margin-top:22px;background:#c89c58;color:#111;font-weight:800;cursor:pointer}.error{display:none;color:#d9a66b;font-size:12px;margin-top:10px}.login{font-size:13px;color:#777;text-align:center;margin-top:20px}.login a{color:#c89c58}.foot{text-align:center;color:#555;font-size:11px;margin-top:30px}
+@media(max-width:620px){.grid{grid-template-columns:1fr}.wrap{padding-top:55px}.panel{padding:23px}.navin span{display:none}}
+</style>
+<link rel="stylesheet" href="design-system.css"><script src="flowly-config.js"></script></head>
+<body>
+<nav class="nav"><div class="navin"><a class="logo" href="index.html">FLOW<i>LY</i></a><span>มีบัญชีอยู่แล้ว? <a href="login.html">เข้าสู่ระบบ</a></span></div></nav>
+<main class="wrap">
+<div class="head"><div class="kicker">GET STARTED</div><h1>เริ่มต้นสร้างระบบ<br><span style="color:#d7b36e">ให้ธุรกิจของคุณ</span></h1><p>สร้างบัญชีสำหรับทดลอง FLOWLY และเตรียมข้อมูลธุรกิจเบื้องต้น</p></div>
+<div class="progress"><div class="bar active"></div><div class="bar"></div><div class="bar"></div></div>
+<section class="panel">
+<h2>สร้างบัญชี</h2><p class="muted">ขั้นที่ 1 จาก 3 · ข้อมูลผู้ใช้งาน</p>
+<form id="registerForm">
+<div class="grid">
+<div><label for="first">ชื่อ</label><input id="first" type="text" placeholder="ชื่อของคุณ" required></div>
+<div><label for="last">นามสกุล</label><input id="last" type="text" placeholder="นามสกุล" required></div>
+</div>
+<label for="businessName">ชื่อธุรกิจ</label><input id="businessName" type="text" placeholder="ชื่อธุรกิจของคุณ" required>
+<label for="email">อีเมล</label><input id="email" type="email" placeholder="you@business.com" required>
+<label for="password">รหัสผ่าน</label><input id="password" type="password" placeholder="อย่างน้อย 8 ตัวอักษร" minlength="8" required>
+<div class="check"><input id="terms" type="checkbox" required><label for="terms" style="margin:0">ฉันยอมรับเงื่อนไขการใช้งานและนโยบายความเป็นส่วนตัวของ FLOWLY</label></div>
+<div id="error" class="error"></div>
+<div id="authMessage" aria-live="polite" style="font-size:11px;color:#777;margin:8px 0;"></div><button class="btn" type="submit">ดำเนินการต่อ →</button>
+</form>
+<div class="login">มีบัญชีอยู่แล้ว? <a href="login.html">เข้าสู่ระบบ</a></div>
+</section>
+<div class="foot">V1 · บันทึกข้อมูลลงฐานข้อมูลจริงเมื่อเชื่อม API</div>
+</main>
+<script>
+(function(){
+  const form=document.getElementById('registerForm'), msg=document.getElementById('authMessage'), err=document.getElementById('error');
+  form.addEventListener('submit',async function(e){
+    e.preventDefault(); err.style.display='none';
+    const password=document.getElementById('password').value;
+    if(password.length<8){err.textContent='รหัสผ่านต้องมีอย่างน้อย 8 ตัวอักษร';err.style.display='block';return}
+    msg.textContent='กำลังสร้างบัญชี...';
+    try{
+      const r=await fetch('/api/v1/auth/register',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify({name:(document.getElementById('first').value+' '+document.getElementById('last').value).trim(),email:document.getElementById('email').value.trim(),password,businessName:document.getElementById('businessName').value.trim()})});
+      const body=await r.json().catch(()=>({}));
+      if(!r.ok) throw new Error(body?.error?.message||'สร้างบัญชีไม่สำเร็จ');
+      msg.textContent='สร้างบัญชีสำเร็จ'; location.href='dashboard.html';
+    }catch(e){msg.textContent=e.message;}
+  });
+})();
+</script>
+</body></html>
