@@ -1,0 +1,362 @@
+﻿<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>เข้าสู่ระบบ — FLOWLY</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  min-height:100vh;
+  background:#080808;
+  color:#f5f2ec;
+  font-family:Inter,"Noto Sans Thai",Arial,sans-serif
+}
+
+a{text-decoration:none;color:inherit}
+
+.page{
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:1.05fr .95fr
+}
+
+.left{
+  padding:42px 7vw;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  border-right:1px solid #202020
+}
+
+.logo{
+  font-size:25px;
+  letter-spacing:.2em;
+  font-weight:800
+}
+
+.logo i{
+  font-style:normal;
+  color:#c89c58
+}
+
+.brand{
+  max-width:650px;
+  margin:auto 0
+}
+
+.kicker{
+  font-size:12px;
+  letter-spacing:.2em;
+  color:#c89c58;
+  font-weight:800
+}
+
+.brand h1{
+  font-size:clamp(42px,5vw,68px);
+  line-height:1.05;
+  letter-spacing:-.04em;
+  margin:18px 0
+}
+
+.brand p{
+  color:#888;
+  font-size:17px;
+  max-width:560px;
+  line-height:1.7
+}
+
+.points{
+  display:grid;
+  gap:12px;
+  margin-top:35px
+}
+
+.point{
+  display:flex;
+  gap:12px;
+  color:#aaa;
+  font-size:14px
+}
+
+.dot{color:#c89c58}
+
+.copy{
+  color:#555;
+  font-size:12px
+}
+
+.right{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:35px
+}
+
+.box{
+  width:min(430px,100%)
+}
+
+.box h2{
+  font-size:32px;
+  margin:0 0 8px
+}
+
+.muted{
+  color:#777;
+  margin:0 0 30px;
+  font-size:14px
+}
+
+label{
+  display:block;
+  color:#aaa;
+  font-size:13px;
+  margin:17px 0 7px
+}
+
+input{
+  width:100%;
+  padding:14px 15px;
+  border:1px solid #2c2c2c;
+  border-radius:10px;
+  background:#111;
+  color:#fff;
+  outline:none
+}
+
+input:focus{
+  border-color:#c89c58
+}
+
+.btn{
+  width:100%;
+  border:0;
+  border-radius:10px;
+  padding:14px;
+  margin-top:24px;
+  background:#c89c58;
+  color:#111;
+  font-weight:800;
+  font-size:14px;
+  cursor:pointer
+}
+
+.helper{
+  display:flex;
+  justify-content:space-between;
+  margin-top:13px;
+  font-size:12px;
+  color:#777
+}
+
+.helper a:hover{
+  color:#c89c58
+}
+
+.error{
+  display:none;
+  color:#d9a66b;
+  font-size:12px;
+  margin-top:10px
+}
+
+.back{
+  display:inline-block;
+  margin-top:25px;
+  color:#777;
+  font-size:13px
+}
+
+@media(max-width:850px){
+  .page{grid-template-columns:1fr}
+  .left{
+    min-height:42vh;
+    border-right:0;
+    border-bottom:1px solid #202020;
+    padding:28px 26px
+  }
+  .brand{margin:50px 0 20px}
+  .points{display:none}
+  .right{padding:45px 26px}
+  .copy{display:none}
+}
+</style>
+
+<script src="flowly-config.js"></script>
+</head>
+
+<body>
+
+<div class="page">
+
+<section class="left">
+
+<a class="logo" href="index.html">
+  FLOW<i>LY</i>
+</a>
+
+<div class="brand">
+
+<div class="kicker">SMART BUSINESS PLATFORM</div>
+
+<h1>
+จัดการธุรกิจของคุณ<br>
+<span style="color:#d7b36e">ได้ง่ายในที่เดียว</span>
+</h1>
+
+<p>
+FLOWLY คือพื้นที่จัดการงานธุรกิจของคุณ
+ทั้งลูกค้า การจอง บริการ และข้อมูลสำคัญ
+เพื่อช่วยให้การทำงานเป็นระบบและง่ายขึ้น
+</p>
+
+<div class="points">
+  <div class="point">
+    <span class="dot">✦</span>
+    ดูภาพรวมธุรกิจและข้อมูลสำคัญในที่เดียว
+  </div>
+
+  <div class="point">
+    <span class="dot">✦</span>
+    จัดการลูกค้าและการจองได้อย่างเป็นระบบ
+  </div>
+
+  <div class="point">
+    <span class="dot">✦</span>
+    รองรับการวิเคราะห์และ AI Business Assistant
+  </div>
+</div>
+
+</div>
+
+<div class="copy">
+  © 2026 FLOWLY · Smart Business, Made Simple.
+</div>
+
+</section>
+
+
+<section class="right">
+
+<div class="box">
+
+<h2>เข้าสู่ระบบ</h2>
+
+<p class="muted">
+ยินดีต้อนรับกลับเข้าสู่ FLOWLY
+พื้นที่จัดการธุรกิจของคุณ
+</p>
+
+<form id="loginForm">
+
+<label for="email">อีเมล</label>
+<input
+  id="email"
+  type="email"
+  placeholder="you@business.com"
+  autocomplete="email"
+  required
+>
+
+<label for="password">รหัสผ่าน</label>
+<input
+  id="password"
+  type="password"
+  placeholder="••••••••"
+  autocomplete="current-password"
+  required
+>
+
+<div id="error" class="error">
+กรุณากรอกอีเมลและรหัสผ่านให้ครบ
+</div>
+
+<div
+  id="authMessage"
+  aria-live="polite"
+  style="font-size:11px;color:#777;margin:8px 0;"
+></div>
+
+<button class="btn" type="submit">
+เข้าสู่ระบบ
+</button>
+
+<div class="helper">
+  <a href="#">ลืมรหัสผ่าน?</a>
+
+  <span>
+    ยังไม่มีบัญชี?
+    <a href="register.html">สร้างบัญชี</a>
+  </span>
+</div>
+
+</form>
+
+<a class="back" href="index.html">
+← กลับหน้าหลัก
+</a>
+
+</div>
+
+</section>
+
+</div>
+
+
+<script>
+(function(){
+
+  const form = document.getElementById('loginForm');
+  const msg = document.getElementById('authMessage');
+  const error = document.getElementById('error');
+
+  form.addEventListener('submit', async function(e){
+
+    e.preventDefault();
+
+    error.style.display = 'none';
+    msg.textContent = 'กำลังเข้าสู่ระบบ...';
+
+    try{
+
+      const r = await fetch('/api/v1/auth/login',{
+        method:'POST',
+        headers:{
+          'Content-Type':'application/json'
+        },
+        credentials:'include',
+        body:JSON.stringify({
+          email:document.getElementById('email').value.trim(),
+          password:document.getElementById('password').value
+        })
+      });
+
+      const body = await r.json().catch(()=>({}));
+
+      if(!r.ok){
+        throw new Error(
+          body?.error?.message || 'เข้าสู่ระบบไม่สำเร็จ'
+        );
+      }
+
+      msg.textContent = 'เข้าสู่ระบบสำเร็จ';
+      location.href = 'dashboard.html';
+
+    }catch(err){
+
+      msg.textContent = err.message;
+      error.style.display = 'none';
+
+    }
+
+  });
+
+})();
+</script>
+
+</body>
+</html>
