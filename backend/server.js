@@ -654,6 +654,58 @@ app.patch("/api/v1/auth/password", auth, async (req, res) => {
   }
 
 });
+
+app.get("/api/v1/auth/me", auth, async (req, res) => {
+  try {
+    const r = await query(
+      `
+      SELECT
+        id,
+        business_id,
+        name,
+        email,
+        role
+      FROM users
+      WHERE id = $1
+      LIMIT 1
+      `,
+      [req.user.userId]
+    );
+
+    const u = r.rows[0];
+
+    if (!u) {
+      return res
+        .status(404)
+        .json(
+          fail(
+            "USER_NOT_FOUND",
+            "User not found"
+          )
+        );
+    }
+
+    res.json(
+      ok({
+        id: u.id,
+        businessId: u.business_id,
+        name: u.name,
+        email: u.email,
+        role: u.role
+      })
+    );
+
+  } catch {
+    res
+      .status(500)
+      .json(
+        fail(
+          "AUTH_ERROR",
+          "Unable to load profile"
+        )
+      );
+  }
+});
 app.post("/api/v1/auth/logout", (req, res) => {
   res.clearCookie(
     COOKIE,
