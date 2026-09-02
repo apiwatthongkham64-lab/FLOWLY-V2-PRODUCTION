@@ -94,7 +94,42 @@
     </div>
   </div>
 </div>
+<div class="panel">
 
+  <h2>Business Profile</h2>
+  <p class="desc">ข้อมูล Workspace และธุรกิจของคุณ</p>
+
+  <div class="field">
+    <div>
+      <b>Business Name</b>
+      <small>ชื่อธุรกิจ</small>
+    </div>
+    <div class="control">
+      <span id="businessName">-</span>
+    </div>
+  </div>
+
+  <div class="field">
+    <div>
+      <b>Phone</b>
+      <small>เบอร์โทรศัพท์</small>
+    </div>
+    <div class="control">
+      <span id="businessPhone">-</span>
+    </div>
+  </div>
+
+  <div class="field">
+    <div>
+      <b>Created Date</b>
+      <small>วันที่สร้าง Workspace</small>
+    </div>
+    <div class="control">
+      <span id="businessCreated">-</span>
+    </div>
+  </div>
+
+</div>
 </section>
 
 </main>
@@ -152,5 +187,50 @@ async function changePassword(){
     alert(json.error?.message || "Unable to update password");
   }
 }
+</script>
+<script>
+
+async function loadBusiness(){
+
+  try {
+
+    const res = await fetch(
+      "/api/v1/business/profile",
+      {
+        credentials:"include"
+      }
+    );
+
+    const json = await res.json();
+
+    console.log("Business Profile:", json);
+
+    if(json.data){
+
+      document.getElementById("businessName").textContent =
+        json.data.name || "-";
+
+      document.getElementById("businessPhone").textContent =
+        json.data.phone || "-";
+
+      document.getElementById("businessCreated").textContent =
+        new Date(json.data.createdAt)
+        .toLocaleDateString("th-TH");
+
+    }
+
+  } catch(err){
+
+    console.error("loadBusiness error:", err);
+
+  }
+
+}
+
+
+document.addEventListener("DOMContentLoaded",()=>{
+  loadBusiness();
+});
+
 </script>
 </body></html>
