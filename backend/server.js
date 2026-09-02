@@ -871,6 +871,58 @@ app.get("/api/v1/auth/me", auth, async (req, res) => {
       );
   }
 });
+app.get("/api/v1/business/profile", auth, async (req, res) => {
+
+  try {
+
+    const r = await query(
+      `
+      SELECT
+        id,
+        name,
+        phone,
+        created_at
+      FROM businesses
+      WHERE id = $1
+      LIMIT 1
+      `,
+      [
+        req.user.businessId
+      ]
+    );
+
+    const business = r.rows[0];
+
+    if (!business) {
+      return res.status(404).json(
+        fail(
+          "NOT_FOUND",
+          "Business not found"
+        )
+      );
+    }
+
+    res.json(
+      ok({
+        id: business.id,
+        name: business.name,
+        phone: business.phone,
+        createdAt: business.created_at
+      })
+    );
+
+  } catch {
+
+    res.status(500).json(
+      fail(
+        "BUSINESS_ERROR",
+        "Unable to load business profile"
+      )
+    );
+
+  }
+
+});
 app.post("/api/v1/auth/logout", (req, res) => {
   res.clearCookie(
     COOKIE,
