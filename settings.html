@@ -88,7 +88,9 @@
       <small>เปลี่ยนรหัสผ่านบัญชี</small>
     </div>
     <div class="control">
-      <button class="save">Change Password</button>
+      <button class="save" onclick="changePassword()">
+  Change Password
+</button>
     </div>
   </div>
 </div>
@@ -114,5 +116,41 @@ async function loadProfile(){
 }
 
 loadProfile();
+</script>
+<script>
+async function changePassword(){
+
+  const oldPassword = prompt("Current password");
+
+  if(!oldPassword){
+    return;
+  }
+
+  const newPassword = prompt("New password (8+ characters)");
+
+  if(!newPassword){
+    return;
+  }
+
+  const res = await fetch("/api/v1/auth/password", {
+    method:"PATCH",
+    credentials:"include",
+    headers:{
+      "Content-Type":"application/json"
+    },
+    body:JSON.stringify({
+      oldPassword,
+      newPassword
+    })
+  });
+
+  const json = await res.json();
+
+  if(json.data){
+    alert("Password updated successfully");
+  }else{
+    alert(json.error?.message || "Unable to update password");
+  }
+}
 </script>
 </body></html>
