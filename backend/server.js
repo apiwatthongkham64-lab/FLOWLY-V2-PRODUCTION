@@ -572,6 +572,171 @@ app.post("/api/v1/auth/login", async (req, res) => {
   }
 });
 
+app.post("/api/v1/auth/forgot-password", async (req, res) => {
+
+  const email =
+    typeof req.body?.email === "string"
+      ? req.body.email.trim().toLowerCase()
+      : "";
+
+  if (!email) {
+    return res.status(400).json(
+      fail(
+        "VALIDATION_ERROR",
+        "email is required"
+      )
+    );
+  }
+
+  try {
+    const r = await query(
+      `
+      SELECT id
+      FROM users
+      WHERE email = $1
+      LIMIT 1
+      `,
+      [email]
+    );
+
+    const user = r.rows[0];
+
+    if (!user) {
+      return res.json(
+        ok({
+          message: "If email exists, reset token created"
+        })
+      );
+    }
+
+    const token = require("crypto")
+      .randomUUID();
+
+    await query(
+      `
+      INSERT INTO password_reset_tokens
+      (
+        user_id,
+        token,
+        expires_at
+      )
+      VALUES
+      (
+        $1,
+        $2,
+        now() + interval '30 minutes'
+      )
+      `,
+      [
+        user.id,
+        token
+      ]
+    );
+
+    res.json(
+      ok({
+        message: "Reset token created",
+        token
+      })
+    );
+
+  } catch {
+    res.status(500).json(
+      fail(
+        "RESET_ERROR",
+        "Unable to create reset token"
+      )
+    );
+  }
+});
+
+app.post("/api/v1/auth/reset-password", async (req, res) => {
+
+  const token = req.body?.token || "";
+  const newPassword = req.body?.newPassword || "";
+
+  if (!token || !newPassword) {
+    return res.status(400).json(
+      fail(
+        "VALIDATION_ERROR",
+        "token and newPassword are required"
+      )
+    );
+  }
+
+  if (newPassword.length < 8) {
+    return res.status(400).json(
+      fail(
+        "VALIDATION_ERROR",
+        "Password must be at least 8 characters"
+      )
+    );
+  }
+
+  try {
+
+    const r = await query(
+      `
+      SELECT user_id
+      FROM password_reset_tokens
+      WHERE token = $1
+      AND used_at IS NULL
+      AND expires_at > now()
+      LIMIT 1
+      `,
+      [token]
+    );
+
+    const reset = r.rows[0];
+
+    if (!reset) {
+      return res.status(400).json(
+        fail(
+          "INVALID_TOKEN",
+          "Reset token invalid or expired"
+        )
+      );
+    }
+
+    const hash = await hashPassword(newPassword);
+
+    await query(
+      `
+      UPDATE users
+      SET password_hash = $1,
+          updated_at = now()
+      WHERE id = $2
+      `,
+      [
+        hash,
+        reset.user_id
+      ]
+    );
+
+    await query(
+      `
+      UPDATE password_reset_tokens
+      SET used_at = now()
+      WHERE token = $1
+      `,
+      [token]
+    );
+
+    res.json(
+      ok({
+        message: "Password reset successfully"
+      })
+    );
+
+  } catch {
+    res.status(500).json(
+      fail(
+        "RESET_ERROR",
+        "Unable to reset password"
+      )
+    );
+  }
+});
 app.patch("/api/v1/auth/password", auth, async (req, res) => {
 
   const oldPassword = req.body?.oldPassword || "";
