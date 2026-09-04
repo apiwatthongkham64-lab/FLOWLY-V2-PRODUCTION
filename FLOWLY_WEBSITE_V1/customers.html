@@ -1,0 +1,829 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Customers — FLOWLY</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:#080808;
+  color:#f5f2ec;
+  font-family:Inter,"Noto Sans Thai",Arial,sans-serif
+}
+
+a{
+  text-decoration:none;
+  color:inherit
+}
+
+.app{
+  min-height:100vh;
+  display:flex
+}
+
+.side{
+  width:235px;
+  background:#0d0d0d;
+  border-right:1px solid #202020;
+  padding:25px 16px;
+  flex-shrink:0
+}
+
+.logo{
+  font-size:23px;
+  letter-spacing:.2em;
+  font-weight:800;
+  padding:0 12px 28px;
+  display:block
+}
+
+.logo i{
+  font-style:normal;
+  color:#c89c58
+}
+
+.section{
+  font-size:10px;
+  color:#555;
+  letter-spacing:.15em;
+  padding:18px 12px 8px
+}
+
+.nav{
+  display:block;
+  padding:11px 12px;
+  border-radius:9px;
+  color:#888;
+  font-size:13px;
+  margin:2px 0
+}
+
+.nav.active,
+.nav:hover{
+  background:#19150f;
+  color:#d4aa67
+}
+
+.main{
+  flex:1;
+  min-width:0
+}
+
+.top{
+  height:72px;
+  border-bottom:1px solid #202020;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 32px
+}
+
+.crumb{
+  color:#777;
+  font-size:13px
+}
+
+.user{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  font-size:13px
+}
+
+.avatar{
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  background:#1e1e1e;
+  border:1px solid #333;
+  display:grid;
+  place-items:center;
+  color:#c89c58;
+  font-weight:800
+}
+
+.content{
+  max-width:1250px;
+  margin:auto;
+  padding:36px 32px 70px
+}
+
+.head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  margin-bottom:25px
+}
+
+.kicker{
+  font-size:11px;
+  letter-spacing:.18em;
+  color:#c89c58;
+  font-weight:800
+}
+
+.head h1{
+  font-size:34px;
+  margin:8px 0 0
+}
+
+.btn{
+  border:0;
+  border-radius:10px;
+  padding:12px 17px;
+  background:#c89c58;
+  color:#111;
+  font-weight:800;
+  cursor:pointer
+}
+
+.btn.secondary{
+  background:#191919;
+  color:#bbb;
+  border:1px solid #303030
+}
+
+.toolbar{
+  margin-bottom:15px
+}
+
+.search{
+  width:min(390px,100%);
+  padding:12px 14px;
+  border:1px solid #292929;
+  border-radius:10px;
+  background:#101010;
+  color:#eee;
+  outline:none
+}
+
+.search:focus{
+  border-color:#c89c58
+}
+
+.panel{
+  background:#101010;
+  border:1px solid #242424;
+  border-radius:15px;
+  padding:18px
+}
+
+.customer-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:14px;
+  padding:14px 0;
+  border-top:1px solid #202020
+}
+
+.customer-row:first-child{
+  border-top:0
+}
+
+.customer-name{
+  font-size:13px;
+  font-weight:700
+}
+
+.customer-phone{
+  color:#666;
+  font-size:11px;
+  margin-top:4px
+}
+
+.customer-actions{
+  display:flex;
+  gap:7px
+}
+
+.empty{
+  padding:26px 0;
+  text-align:center;
+  color:#666;
+  font-size:12px
+}
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:#000b;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  z-index:9999
+}
+
+.modal.open{
+  display:flex
+}
+
+.modalbox{
+  width:min(500px,100%);
+  background:#111;
+  border:1px solid #2b2b2b;
+  border-radius:16px;
+  padding:25px
+}
+
+.modalbox h2{
+  margin:0 0 6px
+}
+
+.muted{
+  color:#777;
+  font-size:13px;
+  margin:0 0 22px
+}
+
+label{
+  display:block;
+  color:#aaa;
+  font-size:12px;
+  margin:13px 0 6px
+}
+
+input{
+  width:100%;
+  padding:12px;
+  border:1px solid #292929;
+  border-radius:9px;
+  background:#0b0b0b;
+  color:#eee
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px
+}
+
+.actions{
+  display:flex;
+  gap:8px
+}
+
+.actions button{
+  flex:1;
+  margin-top:20px
+}
+
+.cancel{
+  background:#1b1b1b;
+  color:#aaa
+}
+
+.message{
+  min-height:18px;
+  margin-top:10px;
+  color:#888;
+  font-size:11px
+}
+
+@media(max-width:900px){
+  .side{width:190px}
+}
+
+@media(max-width:680px){
+  .side{display:none}
+  .top{padding:0 18px}
+  .content{padding:25px 15px}
+  .head{display:block}
+  .head .btn{margin-top:15px}
+  .grid{grid-template-columns:1fr}
+  .customer-row{
+    align-items:flex-start;
+    flex-direction:column
+  }
+}
+</style>
+
+<script src="flowly-config.js"></script>
+</head>
+
+<body>
+
+<div class="app">
+
+<aside class="side">
+
+<a class="logo" href="index.html">
+  FLOW<i>LY</i>
+</a>
+
+<div class="section">WORKSPACE</div>
+
+<a class="nav" href="dashboard.html">⌂ &nbsp; Dashboard</a>
+<a class="nav" href="booking.html">◷ &nbsp; Booking</a>
+<a class="nav active" href="customers.html">◯ &nbsp; Customers</a>
+
+<div class="section">INSIGHTS</div>
+
+<a class="nav" href="business-data.html">▥ &nbsp; Business Data</a>
+<a class="nav" href="ai-assistant.html">✦ &nbsp; AI Assistant</a>
+
+<div class="section">SYSTEM</div>
+
+<a class="nav" href="settings.html">⚙ &nbsp; Settings</a>
+
+</aside>
+
+
+<main class="main">
+
+<header class="top">
+
+<span class="crumb">
+Workspace / Customers
+</span>
+
+<div class="user">
+  <span>FLOWLY Business</span>
+  <div class="avatar">F</div>
+</div>
+
+</header>
+
+
+<section class="content">
+
+<div class="head">
+
+<div>
+  <div class="kicker">CUSTOMER MANAGEMENT</div>
+  <h1>ลูกค้า</h1>
+</div>
+
+<button class="btn" id="newBtn">
+＋ New Customer
+</button>
+
+</div>
+
+
+<div class="toolbar">
+
+<input
+  class="search"
+  id="search"
+  placeholder="ค้นหาชื่อลูกค้า หรือเบอร์โทร..."
+>
+
+</div>
+
+
+<section class="panel">
+
+<div style="margin-bottom:12px">
+  <div class="kicker">CUSTOMERS</div>
+  <h2 style="margin:4px 0 2px;font-size:18px">
+    รายชื่อลูกค้า
+  </h2>
+
+  <p style="margin:0;color:#666;font-size:11px">
+    ข้อมูลลูกค้าจากระบบ
+  </p>
+</div>
+
+<div id="customerList">
+  <div class="empty">กำลังโหลดข้อมูล...</div>
+</div>
+
+</section>
+
+</section>
+
+</main>
+
+</div>
+
+
+<div class="modal" id="modal">
+
+<div class="modalbox">
+
+<h2>เพิ่มลูกค้า</h2>
+
+<p class="muted">
+เพิ่มข้อมูลลูกค้าเข้าสู่ระบบ
+</p>
+
+<div class="grid">
+
+<div>
+  <label for="first">ชื่อ</label>
+  <input id="first" placeholder="ชื่อ">
+</div>
+
+<div>
+  <label for="last">นามสกุล</label>
+  <input id="last" placeholder="นามสกุล">
+</div>
+
+</div>
+
+<label for="phone">เบอร์โทร</label>
+
+<input
+  id="phone"
+  placeholder="08x-xxx-xxxx"
+>
+
+<div id="createMessage" class="message"></div>
+
+<div class="actions">
+
+<button
+  class="btn cancel"
+  id="cancel"
+  type="button"
+>
+ยกเลิก
+</button>
+
+<button
+  class="btn"
+  id="save"
+  type="button"
+>
+เพิ่มลูกค้า
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+(function(){
+
+  const API_BASE = window.FLOWLY_API_BASE || "";
+
+  const list = document.getElementById("customerList");
+  const search = document.getElementById("search");
+
+  const modal = document.getElementById("modal");
+  const newBtn = document.getElementById("newBtn");
+  const cancelBtn = document.getElementById("cancel");
+  const saveBtn = document.getElementById("save");
+
+  const first = document.getElementById("first");
+  const last = document.getElementById("last");
+  const phone = document.getElementById("phone");
+  const createMessage = document.getElementById("createMessage");
+
+  let customers = [];
+
+  function esc(value){
+    return String(value ?? "")
+      .replace(/[&<>"']/g, function(ch){
+        return {
+          "&":"&amp;",
+          "<":"&lt;",
+          ">":"&gt;",
+          '"':"&quot;",
+          "'":"&#39;"
+        }[ch];
+      });
+  }
+
+  async function api(path, options = {}){
+
+    const response = await fetch(API_BASE + path,{
+      credentials:"include",
+      headers:{
+        "Content-Type":"application/json",
+        ...(options.headers || {})
+      },
+      ...options
+    });
+
+    const body = await response.json().catch(() => ({}));
+
+    if(!response.ok){
+      throw new Error(
+        body?.error?.message ||
+        `API request failed (${response.status})`
+      );
+    }
+
+    return body.data;
+  }
+
+  function render(){
+
+    const q = search.value
+      .trim()
+      .toLowerCase();
+
+    const rows = customers.filter(customer => {
+
+      const haystack =
+        `${customer.name || ""} ${customer.phone || ""}`
+          .toLowerCase();
+
+      return haystack.includes(q);
+
+    });
+
+    if(!rows.length){
+
+      list.innerHTML =
+        `<div class="empty">${
+          q
+            ? "ไม่พบลูกค้าที่ค้นหา"
+            : "ยังไม่มีลูกค้า"
+        }</div>`;
+
+      return;
+    }
+
+    list.innerHTML = rows.map(customer => `
+
+      <div
+        class="customer-row"
+        data-customer-id="${esc(customer.id)}"
+      >
+
+        <div>
+
+          <div class="customer-name">
+            ${esc(customer.name)}
+          </div>
+
+          <div class="customer-phone">
+            ${esc(customer.phone || "ไม่ระบุเบอร์")}
+          </div>
+
+        </div>
+
+        <div class="customer-actions">
+
+          <button
+            type="button"
+            class="btn secondary"
+            data-edit="${esc(customer.id)}"
+          >
+            แก้ไข
+          </button>
+
+          <button
+            type="button"
+            class="btn secondary"
+            data-delete="${esc(customer.id)}"
+          >
+            ลบ
+          </button>
+
+        </div>
+
+      </div>
+
+    `).join("");
+
+  }
+
+  async function loadCustomers(){
+
+    try{
+
+      const data = await api("/api/v1/customers");
+
+      customers =
+        Array.isArray(data)
+          ? data
+          : [];
+
+      render();
+
+    }catch(error){
+
+      console.error(
+        "Customer load failed:",
+        error
+      );
+
+      list.innerHTML =
+        `<div class="empty">ไม่สามารถโหลดข้อมูลลูกค้าได้</div>`;
+
+    }
+
+  }
+
+
+  function openCreateModal(){
+
+    first.value = "";
+    last.value = "";
+    phone.value = "";
+    createMessage.textContent = "";
+
+    modal.classList.add("open");
+
+    first.focus();
+
+  }
+
+
+  function closeCreateModal(){
+
+    modal.classList.remove("open");
+
+  }
+
+
+  newBtn.onclick = openCreateModal;
+
+  cancelBtn.onclick = closeCreateModal;
+
+
+  modal.onclick = function(event){
+
+    if(event.target === modal){
+      closeCreateModal();
+    }
+
+  };
+
+
+  saveBtn.onclick = async function(){
+
+    const name =
+      [first.value.trim(), last.value.trim()]
+        .filter(Boolean)
+        .join(" ");
+
+    const phoneValue =
+      phone.value.trim();
+
+    if(!name){
+
+      createMessage.textContent =
+        "กรุณากรอกชื่อลูกค้า";
+
+      first.focus();
+
+      return;
+    }
+
+    saveBtn.disabled = true;
+
+    createMessage.textContent =
+      "กำลังบันทึก...";
+
+    try{
+
+      await api("/api/v1/customers",{
+        method:"POST",
+        body:JSON.stringify({
+          name,
+          phone:phoneValue
+        })
+      });
+
+      closeCreateModal();
+
+      await loadCustomers();
+
+    }catch(error){
+
+      createMessage.textContent =
+        error.message;
+
+    }finally{
+
+      saveBtn.disabled = false;
+
+    }
+
+  };
+
+
+  search.addEventListener(
+    "input",
+    render
+  );
+
+
+  list.addEventListener(
+    "click",
+    async function(event){
+
+      const editButton =
+        event.target.closest("[data-edit]");
+
+      const deleteButton =
+        event.target.closest("[data-delete]");
+
+
+      if(editButton){
+
+        const customer =
+          customers.find(
+            item =>
+              String(item.id) ===
+              editButton.dataset.edit
+          );
+
+        if(!customer) return;
+
+
+        const name =
+          prompt(
+            "ชื่อลูกค้า",
+            customer.name || ""
+          );
+
+        if(name === null) return;
+
+        const cleanName =
+          name.trim();
+
+        if(!cleanName) return;
+
+
+        const phoneValue =
+          prompt(
+            "เบอร์โทร",
+            customer.phone || ""
+          );
+
+        if(phoneValue === null) return;
+
+
+        try{
+
+          await api(
+            "/api/v1/customers/" +
+            encodeURIComponent(customer.id),
+            {
+              method:"PUT",
+              body:JSON.stringify({
+                name:cleanName,
+                phone:phoneValue.trim()
+              })
+            }
+          );
+
+          await loadCustomers();
+
+        }catch(error){
+
+          alert(error.message);
+
+        }
+
+      }
+
+
+      if(deleteButton){
+
+        const id =
+          deleteButton.dataset.delete;
+
+        if(
+          !confirm(
+            "ต้องการลบลูกค้ารายนี้หรือไม่?"
+          )
+        ){
+          return;
+        }
+
+        try{
+
+          await api(
+            "/api/v1/customers/" +
+            encodeURIComponent(id),
+            {
+              method:"DELETE"
+            }
+          );
+
+          await loadCustomers();
+
+        }catch(error){
+
+          alert(error.message);
+
+        }
+
+      }
+
+    }
+  );
+
+
+  loadCustomers();
+
+})();
+</script>
+
+</body>
+</html>

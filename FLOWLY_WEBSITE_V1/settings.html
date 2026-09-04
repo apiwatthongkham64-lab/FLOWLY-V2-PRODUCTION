@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Settings — FLOWLY</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#080808;color:#f4f1eb;font-family:Inter,"Noto Sans Thai",Arial,sans-serif;-webkit-font-smoothing:antialiased}.app{min-height:100vh;display:flex}.side{width:235px;background:#0d0d0d;border-right:1px solid #202020;padding:25px 16px;flex-shrink:0}.logo{font-size:23px;letter-spacing:.2em;font-weight:800;padding:0 12px 28px;display:block;color:#f4f1eb;text-decoration:none}.logo i{font-style:normal;color:#c89c58}.section{font-size:10px;color:#555;letter-spacing:.15em;padding:18px 12px 8px}.nav{display:block;padding:11px 12px;border-radius:9px;color:#888;font-size:13px;margin:2px 0;text-decoration:none}.nav.active,.nav:hover{background:#19150f;color:#d4aa67}.main{flex:1;min-width:0}.top{height:72px;border-bottom:1px solid #202020;display:flex;align-items:center;justify-content:space-between;padding:0 32px}.crumb{color:#777;font-size:13px}.user{display:flex;align-items:center;gap:11px;font-size:13px}.avatar{width:34px;height:34px;border-radius:50%;background:#1e1e1e;border:1px solid #333;display:grid;place-items:center;color:#c89c58;font-weight:800}.content{max-width:1050px;margin:auto;padding:38px 32px 70px}.head{margin-bottom:27px}.kicker{font-size:10px;letter-spacing:.22em;color:#c89c58;font-weight:800}.head h1{font-size:34px;letter-spacing:-.02em;margin:9px 0 5px}.muted{color:#666;font-size:12px}.layout{display:grid;grid-template-columns:210px 1fr;gap:22px}.tabs{background:#101010;border:1px solid #242424;border-radius:14px;padding:8px;height:max-content}.tab{width:100%;text-align:left;border:0;background:transparent;color:#777;padding:12px 13px;border-radius:8px;font-size:12px;cursor:pointer}.tab.active,.tab:hover{background:#19150f;color:#d4aa67}.panel{background:#101010;border:1px solid #242424;border-radius:15px;padding:23px;margin-bottom:14px}.panel h2{font-size:15px;margin:0 0 5px}.desc{color:#666;font-size:11px;margin:0 0 21px}.field{padding:15px 0;border-top:1px solid #202020;display:flex;justify-content:space-between;gap:25px;align-items:center}.field:first-of-type{border-top:0}.field b{font-size:12px;font-weight:600}.field small{display:block;color:#666;font-size:10px;margin-top:4px}.control{min-width:220px}.input,.select{width:100%;padding:11px 12px;border:1px solid #292929;border-radius:9px;background:#0b0b0b;color:#eee;outline:none;font:12px inherit}.input:focus,.select:focus{border-color:#5a452b}.switch{width:42px;height:24px;border-radius:20px;background:#292929;border:1px solid #363636;padding:2px;cursor:pointer}.switch:after{content:"";display:block;width:18px;height:18px;border-radius:50%;background:#777;transition:.2s}.switch.on{background:#4a3925}.switch.on:after{margin-left:18px;background:#c89c58}.save{border:0;border-radius:10px;background:#c89c58;color:#111;padding:12px 18px;font-weight:800;cursor:pointer}.footer{display:flex;justify-content:flex-end;margin-top:5px}.danger{border-color:#382323}.danger .desc{margin-bottom:0}.dangerBtn{border:1px solid #432828;background:#150c0c;color:#b67c7c;border-radius:9px;padding:10px 13px;font-size:11px}
+@media(max-width:800px){.side{width:190px}.layout{grid-template-columns:1fr}.tabs{display:flex;overflow:auto}.tab{white-space:nowrap;width:auto}.field{align-items:flex-start;flex-direction:column}.control{width:100%;min-width:0}}
+@media(max-width:650px){.side{display:none}.top{padding:0 18px}.content{padding:25px 15px}.head h1{font-size:30px}}
+</style>
+<link rel="stylesheet" href="design-system.css"><script src="flowly-config.js"></script></head>
+<body>
+<div class="app">
+<aside class="side"><a class="logo" href="index.html">FLOW<i>LY</i></a>
+<div class="section">WORKSPACE</div><a class="nav" href="dashboard.html">⌂ &nbsp; Dashboard</a><a class="nav" href="booking.html">◷ &nbsp; Booking</a><a class="nav" href="customers.html">◯ &nbsp; Customers</a>
+<div class="section">INSIGHTS</div><a class="nav" href="business-data.html">▥ &nbsp; Business Data</a><a class="nav" href="ai-assistant.html">✦ &nbsp; AI Assistant</a>
+<div class="section">SYSTEM</div><a class="nav active" href="settings.html">⚙ &nbsp; Settings</a></aside>
+<main class="main">
+
+<header class="top">
+  <span class="crumb">Workspace / Settings</span>
+  <div class="user">
+    <span>FLOWLY Business</span>
+    <div class="avatar">F</div>
+  </div>
+</header>
+
+<section class="content">
+
+  <div class="head">
+    <div class="kicker">WORKSPACE SETTINGS</div>
+    <h1>ตั้งค่าระบบ</h1>
+    <div class="muted">จัดการข้อมูลและการตั้งค่าของ Workspace</div>
+  </div>
+
+  <div class="panel">
+  <h2>Account Profile</h2>
+  <p class="desc">ข้อมูลบัญชีผู้ใช้งานปัจจุบัน</p>
+
+  <div class="field">
+    <div>
+      <b>Name</b>
+      <small>ชื่อผู้ใช้งาน</small>
+    </div>
+    <div class="control">
+      <span id="profileName">-</span>
+    </div>
+  </div>
+
+  <div class="field">
+    <div>
+      <b>Email</b>
+      <small>อีเมลสำหรับเข้าสู่ระบบ</small>
+    </div>
+    <div class="control">
+      <span id="profileEmail">-</span>
+    </div>
+  </div>
+
+  <div class="field">
+    <div>
+      <b>Role</b>
+      <small>สิทธิ์ผู้ใช้งาน</small>
+    </div>
+    <div class="control">
+      <span id="profileRole">-</span>
+    </div>
+  </div>
+
+  <div class="field">
+    <div>
+      <b>Business ID</b>
+      <small>Workspace identifier</small>
+    </div>
+    <div class="control">
+      <span id="profileBusiness">-</span>
+    </div>
+  </div>
+</div>
+
+<div class="panel">
+  <h2>Security</h2>
+  <p class="desc">จัดการความปลอดภัยของบัญชี</p>
+
+  <div class="field">
+    <div>
+      <b>Password</b>
+      <small>เปลี่ยนรหัสผ่านบัญชี</small>
+    </div>
+    <div class="control">
+      <button class="save" onclick="changePassword()">
+  Change Password
+</button>
+    </div>
+  </div>
+</div>
+<div class="panel">
+
+  <h2>Business Profile</h2>
+  <p class="desc">ข้อมูล Workspace และธุรกิจของคุณ</p>
+
+  <div class="field">
+    <div>
+      <b>Business Name</b>
+      <small>ชื่อธุรกิจ</small>
+    </div>
+    <div class="control">
+      <span id="businessName">-</span>
+    </div>
+  </div>
+
+  <div class="field">
+    <div>
+      <b>Phone</b>
+      <small>เบอร์โทรศัพท์</small>
+    </div>
+    <div class="control">
+      <span id="businessPhone">-</span>
+    </div>
+  </div>
+
+  <div class="field">
+    <div>
+      <b>Created Date</b>
+      <small>วันที่สร้าง Workspace</small>
+    </div>
+    <div class="control">
+      <span id="businessCreated">-</span>
+    </div>
+  </div>
+
+</div>
+</section>
+
+</main>
+</div>
+<script>
+async function loadProfile(){
+  const res = await fetch("/api/v1/auth/me", {
+    credentials:"include"
+  });
+
+  const json = await res.json();
+
+  if(json.data){
+    document.getElementById("profileName").textContent = json.data.name;
+    document.getElementById("profileEmail").textContent = json.data.email;
+    document.getElementById("profileRole").textContent = json.data.role;
+    document.getElementById("profileBusiness").textContent = json.data.businessId;
+  }
+}
+
+loadProfile();
+</script>
+<script>
+async function changePassword(){
+
+  const oldPassword = prompt("Current password");
+
+  if(!oldPassword){
+    return;
+  }
+
+  const newPassword = prompt("New password (8+ characters)");
+
+  if(!newPassword){
+    return;
+  }
+
+  const res = await fetch("/api/v1/auth/password", {
+    method:"PATCH",
+    credentials:"include",
+    headers:{
+      "Content-Type":"application/json"
+    },
+    body:JSON.stringify({
+      oldPassword,
+      newPassword
+    })
+  });
+
+  const json = await res.json();
+
+  if(json.data){
+    alert("Password updated successfully");
+  }else{
+    alert(json.error?.message || "Unable to update password");
+  }
+}
+</script>
+<script>
+
+async function loadBusiness(){
+
+  try {
+
+    const res = await fetch(
+      "/api/v1/business/profile",
+      {
+        credentials:"include"
+      }
+    );
+
+    const json = await res.json();
+
+    console.log("Business Profile:", json);
+
+    if(json.data){
+
+      document.getElementById("businessName").textContent =
+        json.data.name || "-";
+
+      document.getElementById("businessPhone").textContent =
+        json.data.phone || "-";
+
+      document.getElementById("businessCreated").textContent =
+        new Date(json.data.createdAt)
+        .toLocaleDateString("th-TH");
+
+    }
+
+  } catch(err){
+
+    console.error("loadBusiness error:", err);
+
+  }
+
+}
+
+
+document.addEventListener("DOMContentLoaded",()=>{
+  loadBusiness();
+});
+
+</script>
+</body></html>

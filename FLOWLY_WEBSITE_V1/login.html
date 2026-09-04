@@ -1,0 +1,345 @@
+﻿<!DOCTYPE html>
+<html lang="th">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>FLOWLY Login</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Segoe UI,Arial;
+    background:#f8fafc;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.box{
+    width:380px;
+    background:white;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 20px 40px #0002;
+}
+
+.logo{
+    text-align:center;
+    font-size:32px;
+    font-weight:800;
+    color:#2563eb;
+    margin-bottom:30px;
+}
+
+
+input{
+
+    width:100%;
+    padding:14px;
+    margin:10px 0;
+    border:1px solid #cbd5e1;
+    border-radius:10px;
+    font-size:16px;
+
+}
+
+
+button{
+
+    width:100%;
+    padding:15px;
+    background:#2563eb;
+    color:white;
+    border:none;
+    border-radius:10px;
+    font-size:17px;
+    cursor:pointer;
+
+}
+
+
+button:hover{
+    background:#1d4ed8;
+}
+
+
+.link{
+
+    text-align:center;
+    margin-top:20px;
+
+}
+
+
+a{
+
+    color:#2563eb;
+    text-decoration:none;
+
+}
+
+
+#error{
+
+    color:red;
+    text-align:center;
+    margin-top:15px;
+
+}
+
+
+#success{
+
+    color:green;
+    text-align:center;
+    margin-top:15px;
+
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="box">
+
+
+<div class="logo">
+FLOWLY
+</div>
+
+
+<input 
+id="email"
+type="email"
+placeholder="อีเมล">
+
+
+<input
+id="password"
+type="password"
+placeholder="รหัสผ่าน">
+
+
+<button onclick="login()">
+เข้าสู่ระบบ
+</button>
+
+
+<div id="error"></div>
+<div id="success"></div>
+
+
+
+<div class="link">
+
+<a href="#" onclick="forgotPassword()">
+ลืมรหัสผ่าน?
+</a>
+
+<br><br>
+
+ยังไม่มีบัญชี?
+
+<a href="register.html">
+สร้างบัญชี
+</a>
+
+
+<br><br>
+
+<a href="index.html">
+← กลับหน้าหลัก
+</a>
+
+
+</div>
+
+
+</div>
+
+
+
+<script>
+
+
+// เปลี่ยนตรงนี้จุดเดียวเวลา Deploy จริง
+
+const API_URL = "https://resolve-districts-circles-reference.trycloudflare.com";
+
+
+
+async function login(){
+
+
+const email =
+document.getElementById("email").value;
+
+
+const password =
+document.getElementById("password").value;
+
+
+document.getElementById("error").innerHTML="";
+document.getElementById("success").innerHTML="";
+
+
+try{
+
+
+const r = await fetch(
+API_URL + "/api/v1/auth/login",
+{
+
+method:"POST",
+credentials:"include",
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+
+email,
+password
+
+})
+
+});
+
+
+const data = await r.json();
+
+
+
+if(!r.ok){
+
+throw new Error(
+data.message || "Login failed"
+);
+
+}
+
+
+
+localStorage.setItem(
+"token",
+data.token
+);
+
+
+
+document.getElementById("success").innerHTML =
+"เข้าสู่ระบบสำเร็จ";
+
+
+setTimeout(()=>{
+
+window.location.href="dashboard.html";
+
+},800);
+
+
+
+}
+
+catch(err){
+
+
+document.getElementById("error").innerHTML =
+err.message;
+
+
+}
+
+
+}
+
+
+
+
+async function forgotPassword(){
+
+
+const email =
+document.getElementById("email").value;
+
+
+if(!email){
+
+alert("กรุณาใส่อีเมลก่อน");
+
+return;
+
+}
+
+
+
+try{
+
+
+const r = await fetch(
+
+API_URL + "/api/v1/auth/forgot-password",
+
+{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+
+email
+
+})
+
+});
+
+
+const data = await r.json();
+
+
+
+if(!r.ok){
+
+throw new Error(
+data.message || "ไม่สามารถส่งคำขอได้"
+);
+
+}
+
+
+
+alert(
+"ส่งคำขอรีเซ็ตรหัสผ่านแล้ว"
+);
+
+
+
+}
+
+catch(err){
+
+alert(err.message);
+
+}
+
+
+}
+
+
+</script>
+
+
+</body>
+</html>
