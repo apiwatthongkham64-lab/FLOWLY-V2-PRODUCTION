@@ -13,6 +13,35 @@ const {
 } = require("./auth");
 
 const app = express();
+app.use((req,res,next)=>{
+
+  res.header(
+    "Access-Control-Allow-Origin",
+    "https://flowly-landing-v1.apiwatthongkham64.workers.dev"
+  );
+
+  res.header(
+    "Access-Control-Allow-Credentials",
+    "true"
+  );
+
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+
+  res.header(
+    "Access-Control-Allow-Methods",
+    "GET,POST,PUT,DELETE,OPTIONS"
+  );
+
+  if(req.method==="OPTIONS"){
+    return res.sendStatus(200);
+  }
+
+  next();
+
+});
 
 app.use(express.json({ limit: "100kb" }));
 app.use(cookieParser());
@@ -39,10 +68,10 @@ const setSession = (res, payload) =>
     signSession(payload),
     {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      maxAge: 28800000,
-      path: "/"
+secure: true,
+sameSite: "none",
+maxAge: 28800000,
+path: "/"
     }
   );
 
@@ -2010,7 +2039,127 @@ app.get(
   }
 );
 
+/* =========================================================
+   STAFF
+   ========================================================= */
 
+app.get("/api/v1/staff", auth, async (req, res) => {
+  try {
+    const r = await query(
+      `
+      SELECT
+        id,
+        name,
+        phone,
+        role,
+        active,
+        created_at,
+        updated_at
+      FROM staff
+      WHERE business_id = $1
+      ORDER BY created_at DESC
+      `,
+      [
+        req.user.businessId
+      ]
+    );
+
+    res.json(ok(r.rows));
+
+  } catch (err) {
+    console.error(err);
+
+    res
+      .status(500)
+      .json(
+        fail(
+          "DATABASE_ERROR",
+          err.message
+        )
+      );
+  }
+});
+
+
+app.post("/api/v1/staff", auth, async (req, res) => {
+  const name =
+    typeof req.body?.name === "string"
+      ? req.body.name.trim()
+      : "";
+
+  const phone =
+    typeof req.body?.phone === "string"
+      ? req.body.phone.trim()
+      : "";
+
+  const role =
+    typeof req.body?.role === "string"
+      ? req.body.role.trim()
+      : "staff";
+
+
+  if (!name) {
+    return res
+      .status(400)
+      .json(
+        fail(
+          "VALIDATION_ERROR",
+          "name is required"
+        )
+      );
+  }
+
+
+  try {
+    const r = await query(
+      `
+      INSERT INTO staff(
+        id,
+        business_id,
+        name,
+        phone,
+        role
+      )
+      VALUES(
+        gen_random_uuid(),
+        $1,
+        $2,
+        $3,
+        $4
+      )
+      RETURNING
+        id,
+        name,
+        phone,
+        role,
+        active,
+        created_at,
+        updated_at
+      `,
+      [
+        req.user.businessId,
+        name,
+        phone || null,
+        role || "staff"
+      ]
+    );
+
+
+    res
+      .status(201)
+      .json(ok(r.rows[0]));
+
+  } catch {
+    res
+      .status(500)
+      .json(
+        fail(
+          "DATABASE_ERROR",
+          "Unable to create staff"
+        )
+      );
+  }
+});
 /* =========================================================
    404
    ========================================================= */
