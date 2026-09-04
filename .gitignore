@@ -4,3 +4,31 @@ dist/
 
 backend/.env
 .env
+
+# Build output
+dist/
+
+# Dependencies
+node_modules/
+
+# Electron packages
+*.exe
+*.msi
+
+# Release packages
+*.zip
+
+# Electron build
+dist/
+release/
+*.exe
+
+# Node
+node_modules/
+
+# Release packages
+*.zip
+
+FLOWLY_V1_DELIVERY_PACKAGE/
+FLOWLY_V1_DEMO/
+RELEASE_BACKUP_V1/
