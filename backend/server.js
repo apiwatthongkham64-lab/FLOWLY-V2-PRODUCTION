@@ -68,10 +68,13 @@ const setSession = (res, payload) =>
     signSession(payload),
     {
       httpOnly: true,
-secure: true,
-sameSite: "none",
-maxAge: 28800000,
-path: "/"
+      secure: process.env.NODE_ENV === "production",
+      sameSite:
+        process.env.NODE_ENV === "production"
+          ? "none"
+          : "lax",
+      maxAge: 28800000,
+      path: "/"
     }
   );
 
@@ -1440,11 +1443,13 @@ app.get("/api/v1/bookings", auth, async (req, res) => {
         b.id,
         b.customer_id,
         b.service_id,
+        b.staff_id,
         b.booking_date,
         b.booking_time,
         b.status,
         c.name AS customer_name,
         s.name AS service_name,
+        st.name AS staff_name,
         s.duration_minutes,
         s.price
       FROM bookings b
@@ -1454,6 +1459,9 @@ app.get("/api/v1/bookings", auth, async (req, res) => {
       JOIN services s
         ON s.id = b.service_id
        AND s.business_id = b.business_id
+      LEFT JOIN staff st
+        ON st.id = b.staff_id
+       AND st.business_id = b.business_id
       WHERE b.business_id = $1
       ORDER BY
         b.booking_date DESC,
@@ -1487,6 +1495,26 @@ app.post("/api/v1/bookings", auth, async (req, res) => {
     typeof req.body?.service_id === "string"
       ? req.body.service_id
       : "";
+
+  const staffId =
+    typeof req.body?.staff_id === "string" &&
+    req.body.staff_id.trim()
+      ? req.body.staff_id.trim()
+      : null;
+
+  const uuidPattern =
+    /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
+  if (staffId && !uuidPattern.test(staffId)) {
+    return res
+      .status(400)
+      .json(
+        fail(
+          "VALIDATION_ERROR",
+          "staff_id must be a valid UUID"
+        )
+      );
+  }
 
   const date =
     typeof req.body?.booking_date === "string"
@@ -1549,12 +1577,24 @@ app.post("/api/v1/bookings", auth, async (req, res) => {
           WHERE id = $2
             AND business_id = $3
             AND active = true
-        ) AS service_ok
+        ) AS service_ok,
+
+        (
+          $4::uuid IS NULL
+          OR EXISTS(
+            SELECT 1
+            FROM staff
+            WHERE id = $4
+              AND business_id = $3
+              AND active = true
+          )
+        ) AS staff_ok
       `,
       [
         customerId,
         serviceId,
-        req.user.businessId
+        req.user.businessId,
+        staffId
       ]
     );
 
@@ -1580,6 +1620,19 @@ app.post("/api/v1/bookings", auth, async (req, res) => {
           fail(
             "SERVICE_NOT_FOUND",
             "Active service not found"
+          )
+        );
+    }
+
+    if (!refs.rows[0].staff_ok) {
+      await client.query("ROLLBACK");
+
+      return res
+        .status(404)
+        .json(
+          fail(
+            "STAFF_NOT_FOUND",
+            "Active staff not found"
           )
         );
     }
@@ -1619,13 +1672,20 @@ app.post("/api/v1/bookings", auth, async (req, res) => {
                 )
             )
 
+        AND (
+          $5::uuid IS NULL
+          OR b.staff_id = $5
+          OR b.staff_id IS NULL
+        )
+
       LIMIT 1
       `,
       [
         req.user.businessId,
         date,
         time,
-        serviceId
+        serviceId,
+        staffId
       ]
     );
 
@@ -1649,6 +1709,7 @@ app.post("/api/v1/bookings", auth, async (req, res) => {
         business_id,
         customer_id,
         service_id,
+        staff_id,
         booking_date,
         booking_time,
         status
@@ -1660,12 +1721,14 @@ app.post("/api/v1/bookings", auth, async (req, res) => {
         $3,
         $4,
         $5,
+        $6,
         'pending'
       )
       RETURNING
         id,
         customer_id,
         service_id,
+        staff_id,
         booking_date,
         booking_time,
         status,
@@ -1676,6 +1739,7 @@ app.post("/api/v1/bookings", auth, async (req, res) => {
         req.user.businessId,
         customerId,
         serviceId,
+        staffId,
         date,
         time
       ]
