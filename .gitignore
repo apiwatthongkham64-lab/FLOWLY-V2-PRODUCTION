@@ -32,3 +32,5 @@ node_modules/
 FLOWLY_V1_DELIVERY_PACKAGE/
 FLOWLY_V1_DEMO/
 RELEASE_BACKUP_V1/
+backend/backups/
+booking.encoding-broken-backup.html
