@@ -321,7 +321,7 @@ async function forgotPassword(e){
   try{
 
     const r = await fetch(
-      "http://localhost:3000/api/v1/auth/forgot-password",
+      "/api/v1/auth/forgot-password",
       {
         method:"POST",
         headers:{
@@ -352,7 +352,7 @@ async function forgotPassword(e){
     }
 
     const reset = await fetch(
-      "http://localhost:3000/api/v1/auth/reset-password",
+      "/api/v1/auth/reset-password",
       {
         method:"POST",
         headers:{
@@ -400,7 +400,7 @@ async function forgotPassword(e){
 
     try{
 
-      const r = await fetch('http://localhost:3000/api/v1/auth/login',{
+      const r = await fetch('/api/v1/auth/login',{
         method:'POST',
         headers:{
           'Content-Type':'application/json'
