@@ -8,11 +8,27 @@
 @media(max-width:900px){.side{width:190px}.cards{grid-template-columns:1fr 1fr}.layout{grid-template-columns:1fr}}
 @media(max-width:650px){.side{display:none}.top{padding:0 18px}.content{padding:25px 15px}.head{display:block}.cards{grid-template-columns:1fr 1fr}.layout{display:block}.panel{margin-bottom:15px}.row{min-width:520px}.table{overflow:auto}}
 </style>
+
+<style id="flowly-premium-business-data-v1">
+:root{--line:rgba(255,255,255,.08);--purple:#8d5cff;--purple2:#6b42df;--gold:#d3a45f;--muted:#918d9e}
+body{background:radial-gradient(circle at 75% -10%,rgba(141,92,255,.16),transparent 30%),linear-gradient(#07070b,#090910);color:#f7f5fb}
+.app{display:grid;grid-template-columns:244px minmax(0,1fr)}
+.side{width:auto;height:100vh;position:sticky;top:0;padding:23px 15px;background:rgba(8,8,13,.94);border-right:1px solid var(--line)}
+.logo{display:flex;align-items:center;gap:11px;padding:8px 10px 25px;text-decoration:none;color:#fff;font-size:18px;letter-spacing:.13em}.logo:before{content:"F";width:37px;height:37px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(135deg,var(--purple),#b579ff);box-shadow:0 0 25px rgba(141,92,255,.32);font-size:15px;letter-spacing:0}.logo i{color:var(--gold)}
+.section{padding:16px 11px 7px;font-size:9px;letter-spacing:.18em;color:#615e6b}.nav{display:flex;align-items:center;padding:10px 11px;margin:3px 0;border:1px solid transparent;border-radius:11px;text-decoration:none;color:#aaa6b4;font-size:12px}.nav:hover{background:rgba(255,255,255,.04);color:#fff}.nav.active{background:linear-gradient(90deg,rgba(141,92,255,.2),rgba(141,92,255,.04));border-color:rgba(141,92,255,.2);color:#fff}
+.top{height:69px;position:sticky;top:0;z-index:20;padding:0 27px;border-bottom:1px solid var(--line);background:rgba(7,7,11,.72);backdrop-filter:blur(16px)}.crumb,.user{font-size:11px}.avatar{width:35px;height:35px;background:#191822;border-color:var(--line);color:var(--gold)}
+.content{max-width:1440px;padding:27px;margin:auto}.head{align-items:center;margin-bottom:18px;padding:23px 25px;border:1px solid rgba(141,92,255,.18);border-radius:19px;background:linear-gradient(115deg,rgba(141,92,255,.15),rgba(18,17,27,.92) 60%,rgba(211,164,95,.05));box-shadow:0 16px 45px rgba(0,0,0,.22)}.kicker{font-size:9px;color:var(--gold)}.head h1{font-size:29px;margin:7px 0 4px}.muted{color:var(--muted);font-size:11px}
+.panel{background:linear-gradient(180deg,rgba(19,19,29,.94),rgba(12,12,19,.96));border:1px solid var(--line);border-radius:17px;box-shadow:0 12px 35px rgba(0,0,0,.18)}
+.insight-empty{position:relative;overflow:hidden;padding:70px 28px!important}.insight-empty:before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:rgba(141,92,255,.12);filter:blur(55px);left:50%;top:50%;transform:translate(-50%,-50%)}.insight-icon{position:relative;width:58px;height:58px;margin:0 auto 17px;border-radius:17px;display:grid;place-items:center;background:linear-gradient(135deg,rgba(141,92,255,.28),rgba(211,164,95,.12));border:1px solid rgba(141,92,255,.25);font-size:23px;box-shadow:0 0 35px rgba(141,92,255,.15)}.insight-empty h2,.insight-empty p{position:relative}
+@media(max-width:900px){.app{grid-template-columns:205px minmax(0,1fr)}}
+@media(max-width:650px){.app{display:block}.side{display:none}.content{padding:17px}.head{padding:20px}.head h1{font-size:25px}}
+</style>
+
 <link rel="stylesheet" href="design-system.css"><script src="flowly-config.js"></script></head>
 <body>
 <div class="app">
 <aside class="side"><a class="logo" href="index.html">FLOW<i>LY</i></a>
-<div class="section">WORKSPACE</div><a class="nav" href="dashboard.html">⌂ &nbsp; Dashboard</a><a class="nav" href="booking.html">◷ &nbsp; Booking</a><a class="nav" href="customers.html">◯ &nbsp; Customers</a>
+<div class="section">WORKSPACE</div><a class="nav" href="dashboard.html">⌂ &nbsp; Dashboard</a><a class="nav" href="booking.html">◷ &nbsp; Booking</a><a class="nav" href="customers.html">◯ &nbsp; Customers</a><a class="nav" href="services.html">◇ &nbsp; Services</a>
 <div class="section">INSIGHTS</div><a class="nav active" href="business-data.html">▥ &nbsp; Business Data</a><a class="nav" href="ai-assistant.html">✦ &nbsp; AI Assistant</a><div class="section">SYSTEM</div><a class="nav" href="settings.html">⚙ &nbsp; Settings</a></aside>
 <main class="main">
 
@@ -34,8 +50,8 @@
     </div>
   </div>
 
-  <div class="panel" style="padding:42px 28px;text-align:center;">
-    <div style="font-size:28px;margin-bottom:12px;">▥</div>
+  <div class="panel insight-empty" style="padding:42px 28px;text-align:center;">
+    <div class="insight-icon">▥</div>
 
     <h2 style="margin:0 0 8px;font-size:18px;">
       ข้อมูลเชิงลึกกำลังรอข้อมูลเพิ่มเติม

@@ -3,242 +3,111 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Dashboard — FLOWLY</title>
-
+<title>FLOWLY Premium Dashboard</title>
 <style>
-*{box-sizing:border-box}
-body{margin:0;background:#080808;color:#f5f2ec;font-family:Inter,"Noto Sans Thai",Arial,sans-serif}
-.app{min-height:100vh;display:flex}
-.side{width:235px;background:#0d0d0d;border-right:1px solid #202020;padding:25px 16px;flex-shrink:0}
-.logo{font-size:23px;letter-spacing:.2em;font-weight:800;padding:0 12px 28px;display:block;color:#f5f2ec;text-decoration:none}
-.logo i{font-style:normal;color:#c89c58}
-.section{font-size:10px;color:#555;letter-spacing:.15em;padding:18px 12px 8px}
-.nav{display:block;padding:11px 12px;border-radius:9px;color:#888;font-size:13px;margin:2px 0;text-decoration:none}
-.nav:hover,.nav.active{background:#19150f;color:#d4aa67}
-.bottom{margin-top:70px;border-top:1px solid #202020;padding-top:15px}
-.main{flex:1;min-width:0}
-.top{height:72px;border-bottom:1px solid #202020;display:flex;align-items:center;justify-content:space-between;padding:0 32px}
-.crumb{color:#777;font-size:13px}
-.user{display:flex;align-items:center;gap:11px;font-size:13px}
-.avatar{width:34px;height:34px;border-radius:50%;background:#1e1e1e;border:1px solid #333;display:grid;place-items:center;color:#c89c58;font-weight:800}
-.content{max-width:1250px;margin:auto;padding:38px 32px 70px}
-.welcome{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:28px}
-.kicker{font-size:11px;letter-spacing:.18em;color:#c89c58;font-weight:800}
-.welcome h1{font-size:34px;margin:8px 0 0}
-.date{color:#666;font-size:12px}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.card,.panel{background:#101010;border:1px solid #242424;border-radius:15px}
-.card{padding:20px}
-.label{font-size:12px;color:#777}
-.value{font-size:29px;font-weight:800;margin:8px 0}
-.delta{font-size:11px;color:#8e8e8e}
-.gold{color:#c89c58}
-.mainGrid{display:grid;grid-template-columns:1.55fr .85fr;gap:15px;margin-top:15px}
-.panel{padding:22px}
-.panelHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
-.panelHead b{font-size:15px}
-.panelHead span{color:#666;font-size:11px}
-.chart{height:230px;border:1px solid #202020;border-radius:12px;padding:18px;overflow:hidden}
-.chart svg{width:100%;height:100%}
-.schedule{display:grid;gap:8px}
-.event{display:flex;gap:14px;padding:13px;border:1px solid #202020;border-radius:10px}
-.time{color:#c89c58;font-size:12px;width:45px}
-.event b{font-size:13px}
-.event small{display:block;color:#666;margin-top:2px}
-.quick{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:15px}
-.quick a{padding:14px;border:1px solid #252525;border-radius:10px;color:#aaa;font-size:12px;text-align:center;text-decoration:none}
-.quick a:hover{border-color:#c89c58;color:#d4aa67}
-.status{margin-top:12px;padding:12px 14px;border:1px solid #202020;border-radius:11px;background:#0b0b0b;font-size:11px;color:#777}
-.liveGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
-.liveBox{padding:12px;border:1px solid #222;border-radius:10px;background:#0e0e0e}
-.liveLabel{font-size:10px;color:#777}
-.liveValue{font-size:22px;font-weight:700;margin-top:4px}
-.revenueValue{font-size:24px;font-weight:700;margin-top:10px}
-.meta,.muted{font-size:10px;color:#777}
-.trend{margin-top:12px;display:flex;gap:3px;align-items:flex-end;height:130px;overflow-x:auto}
-.bar{min-width:9px;border-radius:3px 3px 0 0;background:#c89c58}
-.bookingList{display:grid;gap:8px;margin-top:12px}
-.bookingRow{display:flex;justify-content:space-between;gap:10px;padding:11px 0;border-top:1px solid #222}
-.empty{font-size:11px;color:#777;padding:8px 0}
-.error{font-size:11px;color:#c97b58;padding:8px 0}
-@media(max-width:950px){
-  .side{width:190px}
-  .grid{grid-template-columns:1fr 1fr}
-  .mainGrid{grid-template-columns:1fr}
-  .liveGrid{grid-template-columns:1fr 1fr}
-}
-@media(max-width:650px){
-  .side{display:none}
-  .top{padding:0 18px}
-  .content{padding:28px 18px}
-  .welcome{display:block}
-  .date{margin-top:8px}
-  .grid{grid-template-columns:1fr 1fr}
-  .value{font-size:24px}
-}
-</style>
+:root{--bg:#07070b;--panel:#11111a;--panel2:#0d0d14;--line:rgba(255,255,255,.08);--text:#f7f5fb;--muted:#8e8a9b;--purple:#8d5cff;--purple2:#6b42df;--gold:#d3a45f;--green:#73d8a0}
+*{box-sizing:border-box} body{margin:0;color:var(--text);font-family:Inter,"Noto Sans Thai","Segoe UI",Arial,sans-serif;background:radial-gradient(circle at 70% -10%,rgba(141,92,255,.18),transparent 32%),linear-gradient(#07070b,#090910)}
+a{color:inherit}.app{min-height:100vh;display:grid;grid-template-columns:244px minmax(0,1fr)}
+.side{height:100vh;position:sticky;top:0;padding:23px 15px;background:rgba(8,8,13,.94);border-right:1px solid var(--line)}
+.logo{display:flex;align-items:center;gap:11px;padding:0 9px 24px;text-decoration:none;font-size:18px;font-weight:900;letter-spacing:.13em}.logoMark{width:37px;height:37px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(135deg,var(--purple),#b579ff);box-shadow:0 0 25px rgba(141,92,255,.32)}.logo i{font-style:normal;color:var(--gold)}
+.section{padding:16px 11px 7px;font-size:9px;letter-spacing:.18em;color:#615e6b}.nav{display:flex;align-items:center;gap:10px;padding:10px 11px;margin:3px 0;border:1px solid transparent;border-radius:11px;text-decoration:none;color:#aaa6b4;font-size:12px}.nav:hover{background:rgba(255,255,255,.04);color:white}.nav.active{color:#fff;background:linear-gradient(90deg,rgba(141,92,255,.2),rgba(141,92,255,.04));border-color:rgba(141,92,255,.2)}.ico{width:20px;text-align:center}.bottom{position:absolute;left:15px;right:15px;bottom:17px;border-top:1px solid var(--line);padding-top:10px}
+.main{min-width:0}.top{height:69px;position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:0 27px;border-bottom:1px solid var(--line);background:rgba(7,7,11,.7);backdrop-filter:blur(16px)}.crumb{font-size:11px;color:#777382}.user{display:flex;align-items:center;gap:10px}.userText{text-align:right}.userText b{display:block;font-size:11px}.userText span{font-size:9px;color:var(--muted)}.avatar{width:35px;height:35px;border-radius:50%;display:grid;place-items:center;background:#191822;border:1px solid var(--line);color:var(--gold);font-weight:900}
+.content{max-width:1440px;margin:auto;padding:25px 27px 55px}
+.hero{position:relative;overflow:hidden;display:grid;grid-template-columns:1.35fr .65fr;gap:18px;align-items:center;padding:24px 26px;border:1px solid rgba(141,92,255,.18);border-radius:21px;background:linear-gradient(115deg,rgba(141,92,255,.18),rgba(18,17,27,.92) 55%,rgba(211,164,95,.07));box-shadow:0 18px 55px rgba(0,0,0,.28)}.hero:after{content:"";position:absolute;right:-80px;top:-120px;width:330px;height:330px;border-radius:50%;background:radial-gradient(circle,rgba(141,92,255,.28),transparent 65%)}.kicker{font-size:9px;letter-spacing:.18em;color:var(--gold);font-weight:900}.hero h1{font-size:29px;line-height:1.16;margin:7px 0 8px;max-width:760px}.hero p{max-width:680px;margin:0;color:#aaa6b5;font-size:12px;line-height:1.75}.heroActions{display:flex;gap:9px;margin-top:16px;flex-wrap:wrap}.btn{padding:10px 14px;border-radius:10px;border:1px solid var(--line);text-decoration:none;font-size:11px;font-weight:800}.btn.primary{border:0;background:linear-gradient(135deg,var(--purple),var(--purple2));box-shadow:0 9px 25px rgba(141,92,255,.25)}
+.ai{height:138px;display:grid;place-items:center;border:1px solid var(--line);border-radius:17px;background:radial-gradient(circle,rgba(141,92,255,.42),rgba(141,92,255,.08) 30%,transparent 58%);font-size:13px;font-weight:900;letter-spacing:.22em;color:#ded2ff;text-shadow:0 0 22px rgba(141,92,255,.8)}
+.head{display:flex;align-items:flex-end;justify-content:space-between;margin:22px 0 11px}.head h2{font-size:15px;margin:0}.head span{font-size:9px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:11px}.card,.panel{border:1px solid var(--line);border-radius:16px;background:linear-gradient(180deg,rgba(20,20,30,.9),rgba(13,13,20,.94));box-shadow:0 10px 30px rgba(0,0,0,.15)}.card{padding:18px;position:relative;overflow:hidden;min-height:112px}.card:after{content:"";position:absolute;right:-38px;top:-40px;width:90px;height:90px;border-radius:50%;background:rgba(141,92,255,.09)}.label{font-size:10px;color:var(--muted)}.value{font-size:30px;font-weight:900;margin:7px 0 5px;letter-spacing:-.02em}.delta{font-size:9px;color:#777382}.gold{color:var(--gold)}
+.mainGrid{display:grid;grid-template-columns:1.45fr .75fr;gap:11px;margin-top:11px}.panel{padding:18px}.panelHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px}.panelHead b{font-size:12px}.panelHead span{font-size:9px;color:var(--muted)}.chart{height:250px;padding:13px;overflow:hidden;border:1px solid rgba(255,255,255,.05);border-radius:13px;background:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px);background-size:100% 25%}.chart svg{width:100%;height:100%}.schedule{display:grid;gap:8px;max-height:250px;overflow:auto}.event{position:relative;display:grid;grid-template-columns:52px 1fr;gap:9px;padding:11px 12px 11px 14px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.02)}.time{font-size:10px;color:var(--gold);font-weight:900;letter-spacing:.03em}.event b{font-size:11px}.event small{display:block;margin-top:3px;font-size:9px;color:var(--muted)}
+.quick{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.quick a{min-height:72px;padding:12px;display:flex;align-items:center;justify-content:center;text-align:center;border:1px solid var(--line);border-radius:12px;text-decoration:none;font-size:10px;color:#bbb7c5;background:rgba(255,255,255,.02)}.quick a:hover{border-color:rgba(141,92,255,.35);background:rgba(141,92,255,.06);color:white}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:11px}.liveGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.liveBox{padding:12px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.02)}.liveLabel{font-size:9px;color:var(--muted)}.liveValue{font-size:19px;font-weight:900;margin-top:4px}.revenueValue{font-size:25px;font-weight:900;margin:6px 0}.meta,.muted,.empty,.error{font-size:9px;color:var(--muted)}.trend{height:110px;display:flex;align-items:flex-end;gap:4px;overflow-x:auto}.bar{min-width:8px;border-radius:4px 4px 1px 1px;background:linear-gradient(#a87cff,var(--purple2))}.bookingList{display:grid}.bookingRow{display:flex;justify-content:space-between;gap:8px;padding:9px 0;border-top:1px solid var(--line)}.bookingRow:first-child{border-top:0}.status{margin-top:11px;padding:10px 12px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.02);font-size:9px;color:#777382}.footer{text-align:center;padding-top:25px;color:#575461;font-size:9px}
+@media(max-width:1050px){.app{grid-template-columns:205px 1fr}.hero{grid-template-columns:1fr}.grid{grid-template-columns:1fr 1fr}.mainGrid,.two{grid-template-columns:1fr}}
+@media(max-width:700px){.app{display:block}.side{display:none}.top{padding:0 17px}.content{padding:17px}.hero{padding:21px}.hero h1{font-size:24px}.grid,.quick,.liveGrid{grid-template-columns:1fr 1fr}}
 
+.card:nth-child(1){background:linear-gradient(180deg,rgba(28,23,19,.92),rgba(14,13,17,.96))}
+.card:nth-child(2){background:linear-gradient(180deg,rgba(24,20,39,.94),rgba(14,13,20,.96))}
+.card:nth-child(3){background:linear-gradient(180deg,rgba(18,25,31,.94),rgba(13,14,19,.96))}
+.card:nth-child(4){background:linear-gradient(180deg,rgba(26,22,31,.94),rgba(13,13,20,.96))}
+.card .label:before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:7px;background:var(--purple);box-shadow:0 0 12px rgba(141,92,255,.65)}
+.card:nth-child(1) .label:before{background:var(--gold);box-shadow:0 0 12px rgba(211,164,95,.45)}
+.card:nth-child(3) .label:before{background:#62c7d7;box-shadow:0 0 12px rgba(98,199,215,.4)}
+.card:nth-child(4) .label:before{background:#a174ff;box-shadow:0 0 12px rgba(161,116,255,.45)}
+.event:before{content:"";position:absolute;left:0;top:9px;bottom:9px;width:3px;border-radius:6px;background:linear-gradient(var(--purple),var(--gold))}
+.panelHead b{letter-spacing:.01em}
+.chart{box-shadow:inset 0 0 28px rgba(141,92,255,.025)}
+
+</style>
 <script src="flowly-config.js"></script>
 </head>
-
 <body>
 <div class="app">
-
 <aside class="side">
-  <a class="logo" href="index.html">FLOW<i>LY</i></a>
-
+  <a class="logo" href="index.html"><span class="logoMark">F</span><span>FLOW<i>LY</i></span></a>
   <div class="section">WORKSPACE</div>
-  <a class="nav active" href="dashboard.html">◌ &nbsp; Dashboard</a>
-  <a class="nav" href="booking.html">▸ &nbsp; Booking</a>
-  <a class="nav" href="customers.html">▸ &nbsp; Customers</a>
-
+  <a class="nav active" href="dashboard-premium.html"><span class="ico">◈</span>Dashboard</a>
+  <a class="nav" href="booking.html"><span class="ico">◫</span>Booking</a>
+  <a class="nav" href="customers.html"><span class="ico">◎</span>Customers</a>
+  <a class="nav" href="services.html"><span class="ico">◇</span>Services</a>
   <div class="section">INSIGHTS</div>
-  <a class="nav" href="business-data.html">▸ &nbsp; Business Data</a>
-  <a class="nav" href="ai-assistant.html">✦ &nbsp; AI Assistant</a>
-
+  <a class="nav" href="business-data.html"><span class="ico">▤</span>Business Data</a>
+  <a class="nav" href="ai-assistant.html"><span class="ico">✦</span>AI Assistant</a>
   <div class="section">SYSTEM</div>
-  <a class="nav" href="settings.html">⚙ &nbsp; Settings</a>
-
+  <a class="nav" href="settings.html"><span class="ico">⚙</span>Settings</a>
   <div class="bottom">
-    <a class="nav" href="index.html">← &nbsp; กลับหน้าเว็บไซต์หลัก</a>
-    <a class="nav" href="login.html">↪ &nbsp; ออกจากระบบ</a>
+    <a class="nav" href="index.html"><span class="ico">←</span>เว็บไซต์หลัก</a>
+    <a class="nav" href="login.html"><span class="ico">↪</span>ออกจากระบบ</a>
   </div>
 </aside>
-
 <main class="main">
-
 <header class="top">
   <span class="crumb">Workspace / Dashboard</span>
-  <div class="user">
-    <span>FLOWLY Business</span>
-    <div class="avatar">F</div>
-  </div>
+  <div class="user"><div class="userText"><b>FLOWLY Business</b><span>Premium Workspace</span></div><div class="avatar">F</div></div>
 </header>
-
 <section class="content">
-
-  <div class="welcome">
+  <section class="hero">
     <div>
-      <div class="kicker">BUSINESS OVERVIEW</div>
-      <h1>ภาพรวมธุรกิจ 👋</h1>
+      <div class="kicker">SMART BUSINESS CONTROL CENTER</div>
+      <h1>ธุรกิจโตขึ้น การจัดการต้องง่ายขึ้น</h1>
+      <p>รวมลูกค้า การจอง รายได้ บริการ และภาพรวมธุรกิจไว้ในที่เดียว เพื่อให้คุณตัดสินใจได้เร็วขึ้น พร้อมต่อยอดด้วย FLOWLY AI</p>
+      <div class="heroActions"><a class="btn primary" href="booking.html">+ สร้างการจองใหม่</a><a class="btn" href="ai-assistant.html">✦ Ask FLOWLY AI</a></div>
     </div>
-    <div class="date" id="todayDate">—</div>
-  </div>
+    <div class="ai">FLOWLY AI</div>
+  </section>
 
+  <div class="head"><h2>Business Overview</h2><span id="todayDate">—</span></div>
   <div class="grid">
-    <div class="card">
-      <div class="label">Today's Revenue</div>
-      <div class="value" id="todayRevenue">฿0.00</div>
-      <div class="delta gold">จากข้อมูลการจองจริง</div>
-    </div>
-
-    <div class="card">
-      <div class="label">Today's Bookings</div>
-      <div class="value" id="todayBookings">0</div>
-      <div class="delta" id="bookingDelta">กำลังโหลด...</div>
-    </div>
-
-    <div class="card">
-      <div class="label">Customers</div>
-      <div class="value" id="customers">0</div>
-      <div class="delta">จากฐานข้อมูลจริง</div>
-    </div>
-
-    <div class="card">
-      <div class="label">Active Services</div>
-      <div class="value" id="activeServices">0</div>
-      <div class="delta">บริการที่เปิดใช้งาน</div>
-    </div>
+    <div class="card"><div class="label">Today's Revenue</div><div class="value" id="todayRevenue">฿0.00</div><div class="delta gold">รายได้จากข้อมูลการจองจริง</div></div>
+    <div class="card"><div class="label">Today's Bookings</div><div class="value" id="todayBookings">0</div><div class="delta" id="bookingDelta">กำลังโหลด...</div></div>
+    <div class="card"><div class="label">Customers</div><div class="value" id="customers">0</div><div class="delta">ลูกค้าในฐานข้อมูลจริง</div></div>
+    <div class="card"><div class="label">Active Services</div><div class="value" id="activeServices">0</div><div class="delta">บริการที่เปิดใช้งาน</div></div>
   </div>
 
   <div class="mainGrid">
-
-    <div class="panel">
-      <div class="panelHead">
-        <b>Revenue Overview</b>
-        <span>Last 30 days</span>
-      </div>
-      <div class="chart">
-        <svg id="revenueChart" viewBox="0 0 700 220" preserveAspectRatio="none"></svg>
-      </div>
-    </div>
-
-    <div class="panel">
-      <div class="panelHead">
-        <b>Today's Schedule</b>
-        <span id="scheduleCount">0 bookings</span>
-      </div>
-      <div class="schedule" id="schedule">
-        <div class="empty">กำลังโหลด...</div>
-      </div>
-    </div>
-
+    <section class="panel"><div class="panelHead"><b>Revenue Overview</b><span>Last 30 days</span></div><div class="chart"><svg id="revenueChart" viewBox="0 0 700 220" preserveAspectRatio="none"></svg></div></section>
+    <section class="panel"><div class="panelHead"><b>Today's Schedule</b><span id="scheduleCount">0 bookings</span></div><div class="schedule" id="schedule"><div class="empty">กำลังโหลด...</div></div></section>
   </div>
 
-  <div class="panel" style="margin-top:15px">
-    <div class="panelHead">
-      <b>Quick Actions</b>
-      <span>Start here</span>
-    </div>
-
-    <div class="quick">
-      <a href="booking.html">✚ New Booking</a>
-      <a href="customers.html">✚ Customer</a>
-      <a href="ai-assistant.html">✦ Ask AI</a>
-      <a href="business-data.html">▸ View Reports</a>
-    </div>
+  <div class="head"><h2>Quick Actions</h2><span>Start here</span></div>
+  <div class="quick">
+    <a href="booking.html">✚ New Booking</a><a href="customers.html">✚ Customer</a><a href="ai-assistant.html">✦ Ask AI</a><a href="business-data.html">▸ View Reports</a>
   </div>
 
-  <div class="status" id="status">
-    กำลังเชื่อมต่อ PostgreSQL → API → Dashboard...
+  <div class="two">
+    <section class="panel"><div class="panelHead"><b>Live Business Data</b><span>Connected</span></div><div class="liveGrid">
+      <div class="liveBox"><div class="liveLabel">ลูกค้าทั้งหมด</div><div class="liveValue" id="liveCustomers">0</div></div>
+      <div class="liveBox"><div class="liveLabel">บริการที่เปิด</div><div class="liveValue" id="liveServices">0</div></div>
+      <div class="liveBox"><div class="liveLabel">นัดหมายวันนี้</div><div class="liveValue" id="liveToday">0</div></div>
+      <div class="liveBox"><div class="liveLabel">นัดหมาย 7 วัน</div><div class="liveValue" id="liveUpcoming">0</div></div>
+    </div></section>
+    <section class="panel"><div class="panelHead"><b>Revenue — Last 30 Days</b><span>Confirmed + Completed</span></div><div class="revenueValue" id="revenue30">฿0.00</div><div class="meta" id="revenueMeta">กำลังโหลด...</div></section>
   </div>
 
-  <section class="panel" style="margin-top:18px">
-    <div class="kicker">LIVE BUSINESS DATA</div>
+  <div class="two">
+    <section class="panel"><div class="panelHead"><b>Daily Revenue</b><span>Last 30 days</span></div><div class="trend" id="trend"><div class="empty">กำลังโหลด...</div></div></section>
+    <section class="panel"><div class="panelHead"><b>Today's Bookings</b><span>Live</span></div><div class="bookingList" id="todayList"><div class="empty">กำลังโหลด...</div></div></section>
+  </div>
 
-    <div class="liveGrid">
-      <div class="liveBox">
-        <div class="liveLabel">ลูกค้าทั้งหมด</div>
-        <div class="liveValue" id="liveCustomers">0</div>
-      </div>
-
-      <div class="liveBox">
-        <div class="liveLabel">บริการที่เปิด</div>
-        <div class="liveValue" id="liveServices">0</div>
-      </div>
-
-      <div class="liveBox">
-        <div class="liveLabel">นัดหมายวันนี้</div>
-        <div class="liveValue" id="liveToday">0</div>
-      </div>
-
-      <div class="liveBox">
-        <div class="liveLabel">นัดหมาย 7 วัน</div>
-        <div class="liveValue" id="liveUpcoming">0</div>
-      </div>
-    </div>
-  </section>
-
-  <section class="panel" style="margin-top:18px">
-    <div class="kicker">REVENUE — LAST 30 DAYS</div>
-    <div class="revenueValue" id="revenue30">฿0.00</div>
-    <div class="meta" id="revenueMeta">กำลังโหลด...</div>
-  </section>
-
-  <section class="panel" style="margin-top:18px">
-    <div class="kicker">DAILY REVENUE — LAST 30 DAYS</div>
-    <div class="trend" id="trend">
-      <div class="empty">กำลังโหลด...</div>
-    </div>
-  </section>
-
-  <section class="panel" style="margin-top:18px">
-    <div class="kicker">TODAY</div>
-    <div class="bookingList" id="todayList">
-      <div class="empty">กำลังโหลด...</div>
-    </div>
-  </section>
-
+  <div class="status" id="status">กำลังเชื่อมต่อ PostgreSQL → API → Dashboard...</div>
+  <div class="footer">FLOWLY — Smart Business, Made Simple.</div>
 </section>
 </main>
 </div>
@@ -315,10 +184,10 @@ body{margin:0;background:#080808;color:#f5f2ec;font-family:Inter,"Noto Sans Thai
       const y = pts[0][1];
 
       svg.innerHTML =
-        '<circle cx="' + x + '" cy="' + y + '" r="7" fill="#c89c58"></circle>' +
+        '<circle cx="' + x + '" cy="' + y + '" r="7" fill="#8d5cff"></circle>' +
         '<line x1="' + p + '" y1="' + y +
         '" x2="' + (w-p) + '" y2="' + y +
-        '" stroke="#c89c58" stroke-width="2" opacity=".25"></line>';
+        '" stroke="#8d5cff" stroke-width="2" opacity=".25"></line>';
 
       return;
     }
@@ -340,10 +209,10 @@ body{margin:0;background:#080808;color:#f5f2ec;font-family:Inter,"Noto Sans Thai
 
     svg.innerHTML =
       '<path d="' + area +
-      '" fill="#c89c58" opacity=".06"></path>' +
+      '" fill="#8d5cff" opacity=".06"></path>' +
 
       '<path d="' + d +
-      '" fill="none" stroke="#c89c58" stroke-width="4"></path>';
+      '" fill="none" stroke="#8d5cff" stroke-width="4"></path>';
   }
 
   function renderTrend(rows){
@@ -522,6 +391,5 @@ body{margin:0;background:#080808;color:#f5f2ec;font-family:Inter,"Noto Sans Thai
 
 })();
 </script>
-
 </body>
 </html>

@@ -8,11 +8,27 @@
 @media(max-width:900px){.side{width:190px}.features{grid-template-columns:1fr}}
 @media(max-width:650px){.side{display:none}.top{padding:0 18px}.content{padding:25px 15px}.hero h1{font-size:30px}.chat{min-height:330px;padding:18px}.quick{margin-left:0}.features{display:block}.feature{margin-bottom:9px}}
 </style>
+
+<style id="flowly-premium-ai-v1">
+:root{--line:rgba(255,255,255,.08);--purple:#8d5cff;--purple2:#6b42df;--gold:#d3a45f;--muted:#918d9e}
+body{background:radial-gradient(circle at 70% -5%,rgba(141,92,255,.20),transparent 32%),linear-gradient(#07070b,#090910);color:#f7f5fb}
+.app{display:grid;grid-template-columns:244px minmax(0,1fr)}
+.side{width:auto;height:100vh;position:sticky;top:0;padding:23px 15px;background:rgba(8,8,13,.94);border-right:1px solid var(--line)}
+.logo{display:flex;align-items:center;gap:11px;padding:8px 10px 25px;font-size:18px;letter-spacing:.13em}.logo:before{content:"F";width:37px;height:37px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(135deg,var(--purple),#b579ff);box-shadow:0 0 25px rgba(141,92,255,.32);font-size:15px;letter-spacing:0}.logo i{color:var(--gold)}
+.section{padding:16px 11px 7px;font-size:9px;letter-spacing:.18em;color:#615e6b}.nav{display:flex;align-items:center;padding:10px 11px;margin:3px 0;border:1px solid transparent;border-radius:11px;color:#aaa6b4;font-size:12px}.nav:hover{background:rgba(255,255,255,.04);color:#fff}.nav.active{background:linear-gradient(90deg,rgba(141,92,255,.2),rgba(141,92,255,.04));border-color:rgba(141,92,255,.2);color:#fff}
+.top{height:69px;position:sticky;top:0;z-index:20;padding:0 27px;border-bottom:1px solid var(--line);background:rgba(7,7,11,.72);backdrop-filter:blur(16px)}.crumb,.user{font-size:11px}.avatar{width:35px;height:35px;background:#191822;border-color:var(--line);color:var(--gold)}
+.content{max-width:1440px;padding:27px;margin:auto}.hero{max-width:none;margin:0 0 18px;padding:27px;text-align:left;border:1px solid rgba(141,92,255,.2);border-radius:19px;background:linear-gradient(115deg,rgba(141,92,255,.18),rgba(18,17,27,.94) 62%,rgba(211,164,95,.06));box-shadow:0 16px 45px rgba(0,0,0,.22)}.kicker{font-size:9px;color:var(--gold)}.hero h1{font-size:31px;margin:7px 0}.hero p{font-size:11px;color:var(--muted)}
+.shell{max-width:none;background:linear-gradient(180deg,rgba(19,19,29,.97),rgba(12,12,19,.98));border:1px solid rgba(141,92,255,.18);border-radius:18px;box-shadow:0 20px 60px rgba(0,0,0,.32)}.chat{position:relative;overflow:hidden}.chat:before{content:"";position:absolute;width:330px;height:330px;border-radius:50%;background:rgba(141,92,255,.15);filter:blur(65px);left:50%;top:50%;transform:translate(-50%,-50%)}.chat>div{position:relative}.boticon{width:66px!important;height:66px!important;border-radius:20px!important;background:radial-gradient(circle at 35% 30%,#b989ff,var(--purple2) 55%,#251849);border:1px solid rgba(190,150,255,.5)!important;color:#fff!important;box-shadow:0 0 45px rgba(141,92,255,.38);font-size:18px!important}.chat h2{font-size:21px!important}.chat p{color:var(--muted)!important;font-size:11px!important}
+.features{max-width:none;gap:12px}.feature{background:linear-gradient(180deg,rgba(19,19,29,.94),rgba(12,12,19,.96));border:1px solid var(--line);border-radius:15px;padding:19px;transition:.2s}.feature:hover{transform:translateY(-2px);border-color:rgba(141,92,255,.25)}.feature span{color:#a979ff}.feature b{font-size:12px}.feature p{color:var(--muted);font-size:10px}
+@media(max-width:900px){.app{grid-template-columns:205px minmax(0,1fr)}}
+@media(max-width:650px){.app{display:block}.side{display:none}.content{padding:17px}.hero{padding:21px}.hero h1{font-size:27px}}
+</style>
+
 <link rel="stylesheet" href="design-system.css"><script src="flowly-config.js"></script></head>
 <body>
 <div class="app">
 <aside class="side"><a class="logo" href="index.html">FLOW<i>LY</i></a>
-<div class="section">WORKSPACE</div><a class="nav" href="dashboard.html">⌂ &nbsp; Dashboard</a><a class="nav" href="booking.html">◷ &nbsp; Booking</a><a class="nav" href="customers.html">◯ &nbsp; Customers</a>
+<div class="section">WORKSPACE</div><a class="nav" href="dashboard.html">⌂ &nbsp; Dashboard</a><a class="nav" href="booking.html">◷ &nbsp; Booking</a><a class="nav" href="customers.html">◯ &nbsp; Customers</a><a class="nav" href="services.html">◇ &nbsp; Services</a>
 <div class="section">INSIGHTS</div><a class="nav" href="business-data.html">▥ &nbsp; Business Data</a><a class="nav active" href="ai-assistant.html">✦ &nbsp; AI Assistant</a>
 <div class="section">SYSTEM</div><a class="nav" href="settings.html">⚙ &nbsp; Settings</a></aside>
 <main class="main">

@@ -8,11 +8,27 @@
 @media(max-width:800px){.side{width:190px}.layout{grid-template-columns:1fr}.tabs{display:flex;overflow:auto}.tab{white-space:nowrap;width:auto}.field{align-items:flex-start;flex-direction:column}.control{width:100%;min-width:0}}
 @media(max-width:650px){.side{display:none}.top{padding:0 18px}.content{padding:25px 15px}.head h1{font-size:30px}}
 </style>
+
+<style id="flowly-premium-settings-v1">
+:root{--line:rgba(255,255,255,.08);--purple:#8d5cff;--purple2:#6b42df;--gold:#d3a45f;--muted:#918d9e}
+body{background:radial-gradient(circle at 75% -10%,rgba(141,92,255,.16),transparent 30%),linear-gradient(#07070b,#090910);color:#f7f5fb}
+.app{display:grid;grid-template-columns:244px minmax(0,1fr)}
+.side{width:auto;height:100vh;position:sticky;top:0;padding:23px 15px;background:rgba(8,8,13,.94);border-right:1px solid var(--line)}
+.logo{display:flex;align-items:center;gap:11px;padding:8px 10px 25px;font-size:18px;letter-spacing:.13em}.logo:before{content:"F";width:37px;height:37px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(135deg,var(--purple),#b579ff);box-shadow:0 0 25px rgba(141,92,255,.32);font-size:15px;letter-spacing:0}.logo i{color:var(--gold)}
+.section{padding:16px 11px 7px;font-size:9px;letter-spacing:.18em;color:#615e6b}.nav{display:flex;align-items:center;padding:10px 11px;margin:3px 0;border:1px solid transparent;border-radius:11px;color:#aaa6b4;font-size:12px}.nav:hover{background:rgba(255,255,255,.04);color:#fff}.nav.active{background:linear-gradient(90deg,rgba(141,92,255,.2),rgba(141,92,255,.04));border-color:rgba(141,92,255,.2);color:#fff}
+.top{height:69px;position:sticky;top:0;z-index:20;padding:0 27px;border-bottom:1px solid var(--line);background:rgba(7,7,11,.72);backdrop-filter:blur(16px)}.crumb,.user{font-size:11px}.avatar{width:35px;height:35px;background:#191822;border-color:var(--line);color:var(--gold)}
+.content{max-width:1250px;padding:27px;margin:auto}.head{margin-bottom:18px;padding:23px 25px;border:1px solid rgba(141,92,255,.18);border-radius:19px;background:linear-gradient(115deg,rgba(141,92,255,.15),rgba(18,17,27,.92) 60%,rgba(211,164,95,.05));box-shadow:0 16px 45px rgba(0,0,0,.22)}.kicker{font-size:9px;color:var(--gold)}.head h1{font-size:29px;margin:7px 0 4px}.muted,.desc{color:var(--muted)}
+.panel{background:linear-gradient(180deg,rgba(19,19,29,.94),rgba(12,12,19,.96));border:1px solid var(--line);border-radius:17px;padding:22px;margin-bottom:13px;box-shadow:0 12px 35px rgba(0,0,0,.16)}.panel h2{font-size:14px}.field{border-color:var(--line);padding:16px 0}.field b{color:#e8e5ed}.field small{color:#706c7a}.control{color:#c8c4d0;font-size:12px}
+.save{background:linear-gradient(135deg,var(--purple),var(--purple2));color:#fff;box-shadow:0 9px 24px rgba(141,92,255,.18)}.save:hover{filter:brightness(1.08)}
+@media(max-width:900px){.app{grid-template-columns:205px minmax(0,1fr)}}
+@media(max-width:650px){.app{display:block}.side{display:none}.content{padding:17px}.head{padding:20px}.head h1{font-size:26px}}
+</style>
+
 <link rel="stylesheet" href="design-system.css"><script src="flowly-config.js"></script></head>
 <body>
 <div class="app">
 <aside class="side"><a class="logo" href="index.html">FLOW<i>LY</i></a>
-<div class="section">WORKSPACE</div><a class="nav" href="dashboard.html">⌂ &nbsp; Dashboard</a><a class="nav" href="booking.html">◷ &nbsp; Booking</a><a class="nav" href="customers.html">◯ &nbsp; Customers</a>
+<div class="section">WORKSPACE</div><a class="nav" href="dashboard.html">⌂ &nbsp; Dashboard</a><a class="nav" href="booking.html">◷ &nbsp; Booking</a><a class="nav" href="customers.html">◯ &nbsp; Customers</a><a class="nav" href="services.html">◇ &nbsp; Services</a>
 <div class="section">INSIGHTS</div><a class="nav" href="business-data.html">▥ &nbsp; Business Data</a><a class="nav" href="ai-assistant.html">✦ &nbsp; AI Assistant</a>
 <div class="section">SYSTEM</div><a class="nav active" href="settings.html">⚙ &nbsp; Settings</a></aside>
 <main class="main">

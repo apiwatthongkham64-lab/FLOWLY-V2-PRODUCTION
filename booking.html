@@ -10,6 +10,24 @@
 @media(max-width:900px){.side{width:190px}.week,.row{grid-template-columns:60px repeat(7,1fr)}.e1,.e2,.e3,.e4,.e5{left:calc(60px + (100% - 60px)/7 * var(--d,0) + 5px);width:calc((100% - 60px)/7 - 10px)}}
 @media(max-width:650px){.side{display:none}.top{padding:0 18px}.content{padding:25px 15px}.head{display:block}.toolbar{display:block}.filters{margin-top:12px}.calendar{overflow-x:auto}.week,.rows{min-width:720px}}
 </style>
+
+<style id="flowly-premium-booking-v1">
+:root{--bg:#07070b;--panel:#11111a;--line:rgba(255,255,255,.08);--text:#f7f5fb;--muted:#918d9e;--purple:#8d5cff;--purple2:#6b42df;--gold:#d3a45f}
+body{background:radial-gradient(circle at 75% -10%,rgba(141,92,255,.16),transparent 30%),linear-gradient(#07070b,#090910);color:var(--text)}
+.app{display:grid;grid-template-columns:244px minmax(0,1fr)}
+.side{width:auto;height:100vh;position:sticky;top:0;padding:23px 15px;background:rgba(8,8,13,.94);border-right:1px solid var(--line)}
+.logo{display:flex;align-items:center;gap:11px;padding:8px 10px 25px;text-decoration:none;color:#fff;font-size:18px;letter-spacing:.13em}.logo:before{content:"F";width:37px;height:37px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(135deg,var(--purple),#b579ff);box-shadow:0 0 25px rgba(141,92,255,.32);font-size:15px;letter-spacing:0}.logo i{color:var(--gold)}
+.section{padding:16px 11px 7px;font-size:9px;letter-spacing:.18em;color:#615e6b}.nav{display:flex;align-items:center;padding:10px 11px;margin:3px 0;border:1px solid transparent;border-radius:11px;text-decoration:none;color:#aaa6b4;font-size:12px}.nav:hover{background:rgba(255,255,255,.04);color:#fff}.nav.active{background:linear-gradient(90deg,rgba(141,92,255,.2),rgba(141,92,255,.04));border-color:rgba(141,92,255,.2);color:#fff}
+.top{height:69px;position:sticky;top:0;z-index:20;padding:0 27px;border-bottom:1px solid var(--line);background:rgba(7,7,11,.72);backdrop-filter:blur(16px)}.crumb{font-size:11px;color:#777382}.user{font-size:11px}.avatar{width:35px;height:35px;background:#191822;border-color:var(--line);color:var(--gold)}
+.content{max-width:1440px;padding:27px;margin:auto}.head{align-items:center;margin-bottom:20px;padding:23px 25px;border:1px solid rgba(141,92,255,.18);border-radius:19px;background:linear-gradient(115deg,rgba(141,92,255,.15),rgba(18,17,27,.92) 60%,rgba(211,164,95,.05));box-shadow:0 16px 45px rgba(0,0,0,.22)}.kicker{font-size:9px;color:var(--gold)}.head h1{font-size:29px;margin:7px 0 0}.btn{padding:11px 15px;border-radius:10px;background:linear-gradient(135deg,var(--purple),var(--purple2));color:#fff;box-shadow:0 9px 24px rgba(141,92,255,.2)}
+.toolbar{align-items:center;margin-bottom:11px}.filters{gap:7px}.filter{background:rgba(255,255,255,.025);border:1px solid var(--line);border-radius:10px;color:#aaa6b4;padding:9px 12px}.filter:hover{border-color:rgba(141,92,255,.35);color:#fff}.date{color:var(--muted);font-size:10px}
+.calendar{background:linear-gradient(180deg,rgba(19,19,29,.94),rgba(12,12,19,.96));border:1px solid var(--line);border-radius:17px;box-shadow:0 12px 35px rgba(0,0,0,.18)}.week{border-bottom-color:var(--line)}.day{border-left-color:rgba(255,255,255,.055);color:#777382;padding:12px 7px}.day strong{color:#f2eff8;font-size:15px}.row{border-bottom-color:rgba(255,255,255,.045)}.hour{color:#686574}.cell{border-left-color:rgba(255,255,255,.045)}.event{border:1px solid rgba(141,92,255,.35);background:linear-gradient(135deg,rgba(141,92,255,.22),rgba(211,164,95,.08));box-shadow:0 8px 20px rgba(0,0,0,.22)}.event b{color:#fff}.event small{color:#b5afc4}
+.recent{background:linear-gradient(180deg,rgba(19,19,29,.94),rgba(12,12,19,.96))!important;border-color:var(--line)!important;border-radius:16px!important;box-shadow:0 10px 30px rgba(0,0,0,.16)}.recent h3{font-size:13px!important}.legend{color:#777382}.legend span:before{background:var(--purple);box-shadow:0 0 10px rgba(141,92,255,.55)}
+.modal{background:rgba(0,0,0,.76);backdrop-filter:blur(8px);z-index:100}.modalbox{width:min(520px,100%);background:linear-gradient(180deg,#15141f,#0e0e15);border:1px solid rgba(141,92,255,.22);border-radius:18px;padding:24px;box-shadow:0 30px 80px rgba(0,0,0,.55)}.modalbox h2{font-size:20px}.muted{color:var(--muted);font-size:11px}label{color:#aaa6b4;font-size:10px}input,select{background:#0b0b12;border:1px solid var(--line);border-radius:10px;color:#eee;padding:11px}input:focus,select:focus{outline:none;border-color:rgba(141,92,255,.55);box-shadow:0 0 0 3px rgba(141,92,255,.08)}.cancel{background:#1a1922;color:#aaa6b4;box-shadow:none}.flowly-error{color:#e08b7b;font-size:10px;align-self:center}
+@media(max-width:900px){.app{grid-template-columns:205px minmax(0,1fr)}}
+@media(max-width:650px){.app{display:block}.side{display:none}.content{padding:17px}.head{padding:20px}.head h1{font-size:25px}}
+</style>
+
 <link rel="stylesheet" href="design-system.css"><script src="flowly-config.js"></script></head>
 <body>
 <div class="app">

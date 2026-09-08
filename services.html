@@ -19,12 +19,45 @@ button.secondary{background:#151515;color:#eee}
 .name{font-weight:700;font-size:13px}.meta{font-size:10px;color:#777;margin-top:4px}
 @media(max-width:650px){.grid{grid-template-columns:1fr}}
 </style>
+
+<style id="flowly-premium-services-v1">
+:root{--line:rgba(255,255,255,.08);--purple:#8d5cff;--purple2:#6b42df;--gold:#d3a45f;--muted:#918d9e}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 75% -10%,rgba(141,92,255,.16),transparent 30%),linear-gradient(#07070b,#090910);color:#f7f5fb;font-family:Inter,"Noto Sans Thai",Arial,sans-serif}
+.app{min-height:100vh;display:grid;grid-template-columns:244px minmax(0,1fr)}
+.side{height:100vh;position:sticky;top:0;padding:23px 15px;background:rgba(8,8,13,.94);border-right:1px solid var(--line)}
+.logo{display:flex;align-items:center;gap:11px;padding:8px 10px 25px;text-decoration:none;color:#fff;font-size:18px;letter-spacing:.13em;font-weight:800}.logo:before{content:"F";width:37px;height:37px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(135deg,var(--purple),#b579ff);box-shadow:0 0 25px rgba(141,92,255,.32);font-size:15px;letter-spacing:0}.logo i{font-style:normal;color:var(--gold)}
+.section{padding:16px 11px 7px;font-size:9px;letter-spacing:.18em;color:#615e6b}.nav{display:flex;padding:10px 11px;margin:3px 0;border:1px solid transparent;border-radius:11px;text-decoration:none;color:#aaa6b4;font-size:12px}.nav:hover{background:rgba(255,255,255,.04);color:#fff}.nav.active{background:linear-gradient(90deg,rgba(141,92,255,.2),rgba(141,92,255,.04));border-color:rgba(141,92,255,.2);color:#fff}
+.main{min-width:0}.top{height:69px;position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:0 27px;border-bottom:1px solid var(--line);background:rgba(7,7,11,.72);backdrop-filter:blur(16px)}.crumb,.user{font-size:11px;color:#777382}.user{display:flex;align-items:center;gap:11px;color:#ddd}.avatar{width:35px;height:35px;border-radius:50%;display:grid;place-items:center;background:#191822;border:1px solid var(--line);color:var(--gold);font-weight:800}
+.wrap{max-width:1440px;margin:auto;padding:27px}.hero{padding:23px 25px;border:1px solid rgba(141,92,255,.18);border-radius:19px;background:linear-gradient(115deg,rgba(141,92,255,.15),rgba(18,17,27,.92) 60%,rgba(211,164,95,.05));box-shadow:0 16px 45px rgba(0,0,0,.22)}.kicker{font-size:9px;letter-spacing:.18em;color:var(--gold);font-weight:800}h1{margin:7px 0 4px;font-size:29px}.sub{color:var(--muted);font-size:11px}
+.panel{margin-top:16px;padding:19px;border:1px solid var(--line);border-radius:17px;background:linear-gradient(180deg,rgba(19,19,29,.94),rgba(12,12,19,.96));box-shadow:0 12px 35px rgba(0,0,0,.18)}.grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px}label{font-size:10px;color:#aaa6b4}input{background:#0b0b12;color:#eee;border:1px solid var(--line);border-radius:10px;padding:11px}input:focus{outline:none;border-color:rgba(141,92,255,.55);box-shadow:0 0 0 3px rgba(141,92,255,.08)}
+button{border:0;background:linear-gradient(135deg,var(--purple),var(--purple2));color:#fff;border-radius:10px;padding:10px 14px;cursor:pointer;font-weight:700;box-shadow:0 9px 24px rgba(141,92,255,.16)}button.secondary{background:#181721;color:#aaa6b4;border:1px solid var(--line);box-shadow:none}.actions{display:flex;gap:8px;margin-top:12px}.row{padding:14px 12px;border-top:1px solid var(--line);border-radius:11px}.row:hover{background:rgba(141,92,255,.045)}.name{font-size:12px}.meta{font-size:10px;color:var(--muted)}
+@media(max-width:900px){.app{grid-template-columns:205px minmax(0,1fr)}}
+@media(max-width:680px){.app{display:block}.side{display:none}.wrap{padding:17px}.grid{grid-template-columns:1fr}}
+</style>
+
 <script src="flowly-config.js"></script></head>
 <body>
+<div class="app">
+<aside class="side">
+<a class="logo" href="index.html">FLOW<i>LY</i></a>
+<div class="section">WORKSPACE</div>
+<a class="nav" href="dashboard.html">⌂ &nbsp; Dashboard</a>
+<a class="nav" href="booking.html">◷ &nbsp; Booking</a>
+<a class="nav" href="customers.html">◯ &nbsp; Customers</a>
+<a class="nav active" href="services.html">◇ &nbsp; Services</a>
+<div class="section">INSIGHTS</div>
+<a class="nav" href="business-data.html">▥ &nbsp; Business Data</a>
+<a class="nav" href="ai-assistant.html">✦ &nbsp; AI Assistant</a>
+<div class="section">SYSTEM</div>
+<a class="nav" href="settings.html">⚙ &nbsp; Settings</a>
+</aside>
+<main class="main">
+<header class="top"><span class="crumb">Workspace / Services</span><div class="user"><span>FLOWLY Business</span><div class="avatar">F</div></div></header>
 <div class="wrap">
+<div class="hero">
 <div class="kicker">FLOWLY / SERVICES</div>
 <h1>บริการ</h1>
-<div class="sub">จัดการรายการบริการ ราคา และระยะเวลา</div>
+<div class="sub">จัดการรายการบริการ ราคา และระยะเวลา</div></div>
 
 <section class="panel">
   <div class="kicker">ADD SERVICE</div>
@@ -40,7 +73,7 @@ button.secondary{background:#151515;color:#eee}
   <div class="kicker">SERVICE LIST</div>
   <div id="list" style="margin-top:5px"><div class="meta">กำลังโหลด...</div></div>
 </section>
-</div>
+</div></main></div>
 <script>
 (function(){
  const API=window.FLOWLY_API_BASE||"";
