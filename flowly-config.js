@@ -1,1 +1,1 @@
-window.FLOWLY_API_BASE = "https://flowly-v2-production-production.up.railway.app";
+window.FLOWLY_API_BASE = "";
