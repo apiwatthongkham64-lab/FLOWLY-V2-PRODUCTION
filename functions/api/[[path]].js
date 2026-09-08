@@ -9,7 +9,7 @@ export async function onRequest(context) {
   const headers = new Headers(context.request.headers);
   headers.delete("host");
 
-  const request = new Request(target, {
+  const upstream = await fetch(target, {
     method: context.request.method,
     headers,
     body:
@@ -20,5 +20,22 @@ export async function onRequest(context) {
     redirect: "manual"
   });
 
-  return fetch(request);
+  const responseHeaders = new Headers(upstream.headers);
+
+  const setCookie = upstream.headers.get("set-cookie");
+
+  if (setCookie) {
+    responseHeaders.delete("set-cookie");
+
+    responseHeaders.append(
+      "set-cookie",
+      setCookie.replace(/;\s*Domain=[^;]+/gi, "")
+    );
+  }
+
+  return new Response(upstream.body, {
+    status: upstream.status,
+    statusText: upstream.statusText,
+    headers: responseHeaders
+  });
 }
