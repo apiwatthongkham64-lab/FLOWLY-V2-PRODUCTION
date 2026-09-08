@@ -17,7 +17,7 @@ app.use((req,res,next)=>{
 
   res.header(
     "Access-Control-Allow-Origin",
-    "https://flowly-landing-v1.apiwatthongkham64.workers.dev"
+    "https://flowly-v2-production.pages.dev"
   );
 
   res.header(
