@@ -26,10 +26,10 @@
 <header class="top"><span class="crumb">Workspace / Booking</span><div class="user"><span>FLOWLY Business</span><div class="avatar">F</div></div></header>
 <section class="content">
 <div class="head"><div><div class="kicker">BOOKING MANAGEMENT</div><h1>ตารางนัดหมาย</h1></div><button class="btn" id="newBtn">＋ New Booking</button></div>
-<div class="toolbar"><div class="filters"><button class="filter">‹ &nbsp; วันนี้</button><button class="filter">สัปดาห์นี้ ▾</button><button class="filter">ทั้งหมด ▾</button></div><div class="date">24–30 August 2026</div></div>
+<div class="toolbar"><div class="filters"><button class="filter" id="prevWeekBtn">‹ สัปดาห์ก่อน</button><button class="filter" id="todayBtn">วันนี้</button><button class="filter" id="nextWeekBtn">สัปดาห์ถัดไป ›</button></div><div class="date" id="calendarRange">24–30 August 2026</div></div>
 <div class="calendar">
-<div class="week"><div></div><div class="day">จันทร์<strong>24</strong></div><div class="day">อังคาร<strong>25</strong></div><div class="day">พุธ<strong>26</strong></div><div class="day">พฤหัสบดี<strong>27</strong></div><div class="day">ศุกร์<strong>28</strong></div><div class="day">เสาร์<strong>29</strong></div><div class="day">อาทิตย์<strong>30</strong></div></div>
-<div class="rows">
+<div class="week" id="calendarWeek"><div></div><div class="day">จันทร์<strong>24</strong></div><div class="day">อังคาร<strong>25</strong></div><div class="day">พุธ<strong>26</strong></div><div class="day">พฤหัสบดี<strong>27</strong></div><div class="day">ศุกร์<strong>28</strong></div><div class="day">เสาร์<strong>29</strong></div><div class="day">อาทิตย์<strong>30</strong></div></div>
+<div class="rows" id="calendarRows">
 <div class="row"><div class="hour">10:00</div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div></div>
 <div class="row"><div class="hour">11:00</div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div></div>
 <div class="row"><div class="hour">12:00</div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div></div>
@@ -315,7 +315,8 @@ function renderBookingsFromApi(items) {
             );
           }
 
-          await loadBookingsFromApi();
+          await 
+loadBookingsFromApi();
 
         } catch (error) {
           console.error("Booking status update failed:", error);
@@ -325,6 +326,191 @@ function renderBookingsFromApi(items) {
       };
     });
 }
+
+let calendarAnchorDate = new Date();
+
+function renderCalendarFromApi(items) {
+  const rangeEl = document.getElementById("calendarRange");
+  const weekEl = document.getElementById("calendarWeek");
+  const rowsEl = document.getElementById("calendarRows");
+
+  if (!rangeEl || !weekEl || !rowsEl) return;
+
+  const thaiDays = [
+    "\u0E08\u0E31\u0E19\u0E17\u0E23\u0E4C",
+    "\u0E2D\u0E31\u0E07\u0E04\u0E32\u0E23",
+    "\u0E1E\u0E38\u0E18",
+    "\u0E1E\u0E24\u0E2B\u0E31\u0E2A\u0E1A\u0E14\u0E35",
+    "\u0E28\u0E38\u0E01\u0E23\u0E4C",
+    "\u0E40\u0E2A\u0E32\u0E23\u0E4C",
+    "\u0E2D\u0E32\u0E17\u0E34\u0E15\u0E22\u0E4C"
+  ];
+
+  const now = new Date(calendarAnchorDate);
+  const day = now.getDay();
+  const mondayOffset = day === 0 ? -6 : 1 - day;
+
+  const monday = new Date(now);
+  monday.setHours(0, 0, 0, 0);
+  monday.setDate(now.getDate() + mondayOffset);
+
+  const weekDates = Array.from({ length: 7 }, (_, i) => {
+    const d = new Date(monday);
+    d.setDate(monday.getDate() + i);
+    return d;
+  });
+
+  const pad = n => String(n).padStart(2, "0");
+  const isoLocal = d =>
+    `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+
+  const first = weekDates[0];
+  const last = weekDates[6];
+
+  rangeEl.textContent =
+    `${pad(first.getDate())}/${pad(first.getMonth() + 1)}/${first.getFullYear()} - ` +
+    `${pad(last.getDate())}/${pad(last.getMonth() + 1)}/${last.getFullYear()}`;
+
+  weekEl.innerHTML =
+    "<div></div>" +
+    weekDates.map((d, i) =>
+      `<div class="day">${thaiDays[i]}<strong>${d.getDate()}</strong></div>`
+    ).join("");
+
+  const startHour = 8;
+  const endHour = 22;
+  const rowHeight = 118;
+
+  rowsEl.innerHTML = "";
+
+  for (let hour = startHour; hour <= endHour; hour++) {
+    rowsEl.insertAdjacentHTML(
+      "beforeend",
+      `<div class="row">
+        <div class="hour">${pad(hour)}:00</div>
+        <div class="cell"></div><div class="cell"></div>
+        <div class="cell"></div><div class="cell"></div>
+        <div class="cell"></div><div class="cell"></div>
+        <div class="cell"></div>
+      </div>`
+    );
+  }
+
+  const visibleEvents = (items || [])
+    .map(item => {
+      const dayIndex = weekDates.findIndex(d => isoLocal(d) === item.date);
+      if (dayIndex < 0) return null;
+
+      const [hourText, minuteText] = String(item.time || "00:00").split(":");
+      const hour = Number(hourText);
+      const minute = Number(minuteText || 0);
+
+      if (!Number.isFinite(hour) || hour < startHour || hour > endHour) {
+        return null;
+      }
+
+      const duration = Number(item.duration_minutes || 60);
+      const startMinutes = hour * 60 + minute;
+
+      return {
+        item,
+        dayIndex,
+        hour,
+        minute,
+        duration,
+        startMinutes,
+        endMinutes: startMinutes + duration,
+        lane: 0,
+        laneCount: 1
+      };
+    })
+    .filter(Boolean);
+
+  for (let dayIndex = 0; dayIndex < 7; dayIndex++) {
+    const dayEvents = visibleEvents
+      .filter(x => x.dayIndex === dayIndex)
+      .sort((a, b) => a.startMinutes - b.startMinutes);
+
+    let cluster = [];
+    let clusterEnd = -1;
+
+    const assignCluster = events => {
+      if (!events.length) return;
+
+      const laneEnds = [];
+
+      events.forEach(eventData => {
+        let lane = laneEnds.findIndex(
+          laneEnd => laneEnd <= eventData.startMinutes
+        );
+
+        if (lane === -1) {
+          lane = laneEnds.length;
+          laneEnds.push(eventData.endMinutes);
+        } else {
+          laneEnds[lane] = eventData.endMinutes;
+        }
+
+        eventData.lane = lane;
+      });
+
+      const laneCount = Math.max(1, laneEnds.length);
+      events.forEach(x => x.laneCount = laneCount);
+    };
+
+    dayEvents.forEach(eventData => {
+      if (cluster.length && eventData.startMinutes >= clusterEnd) {
+        assignCluster(cluster);
+        cluster = [];
+        clusterEnd = -1;
+      }
+
+      cluster.push(eventData);
+      clusterEnd = Math.max(clusterEnd, eventData.endMinutes);
+    });
+
+    assignCluster(cluster);
+  }
+
+  visibleEvents.forEach(eventData => {
+    const { item, dayIndex, hour, minute, duration, lane, laneCount } = eventData;
+
+    const event = document.createElement("div");
+    event.className = "event";
+
+    const top =
+      (hour - startHour) * rowHeight +
+      (minute / 60) * rowHeight +
+      6;
+
+    const overlapOffset = lane * 18;
+
+    event.style.left =
+      `calc(80px + (100% - 80px)/7 * ${dayIndex} + 7px + ${overlapOffset}px)`;
+
+    event.style.top = `${top}px`;
+
+    event.style.width =
+      `calc((100% - 80px)/7 - 14px - ${(laneCount - 1) * 18}px)`;
+
+    event.style.zIndex = String(10 + lane);
+    event.style.height =
+      `${Math.max(42, (duration / 60) * rowHeight - 12)}px`;
+
+    event.title =
+      `${item.name || "Booking"} | ${item.time || ""} | ${item.service || ""}` +
+      (item.staff ? ` | ${item.staff}` : "");
+
+    event.innerHTML = `
+      <b>${item.time || ""}</b>
+      <small>${item.name || "Booking"}</small>
+    `;
+
+    rowsEl.appendChild(event);
+  });
+}
+
+loadBookingsFromApi();
 
 loadBookingsFromApi();
 function getCustomers(){
@@ -515,6 +701,7 @@ async function loadBookingsFromApi() {
     }));
 
     renderBookingsFromApi(apiItems);
+    renderCalendarFromApi(apiItems);
 
     return apiItems;
 
@@ -544,6 +731,35 @@ modal.onclick = e => {
   }
 };
 
+
+
+
+/* CALENDAR CONTROLS */
+
+const prevWeekBtn = document.getElementById("prevWeekBtn");
+const todayBtn = document.getElementById("todayBtn");
+const nextWeekBtn = document.getElementById("nextWeekBtn");
+
+if (prevWeekBtn) {
+  prevWeekBtn.onclick = async () => {
+    calendarAnchorDate.setDate(calendarAnchorDate.getDate() - 7);
+    await loadBookingsFromApi();
+  };
+}
+
+if (todayBtn) {
+  todayBtn.onclick = async () => {
+    calendarAnchorDate = new Date();
+    await loadBookingsFromApi();
+  };
+}
+
+if (nextWeekBtn) {
+  nextWeekBtn.onclick = async () => {
+    calendarAnchorDate.setDate(calendarAnchorDate.getDate() + 7);
+    await loadBookingsFromApi();
+  };
+}
 
 /* =========================================================
    INITIAL LOAD
