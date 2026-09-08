@@ -47,7 +47,7 @@ label{display:block;color:#aaa;font-size:13px;margin:16px 0 7px}input{width:100%
     if(password.length<8){err.textContent='รหัสผ่านต้องมีอย่างน้อย 8 ตัวอักษร';err.style.display='block';return}
     msg.textContent='กำลังสร้างบัญชี...';
     try{
-      const r=await fetch('/api/v1/auth/register',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify({name:(document.getElementById('first').value+' '+document.getElementById('last').value).trim(),email:document.getElementById('email').value.trim(),password,businessName:document.getElementById('businessName').value.trim()})});
+      const r=await fetch((window.FLOWLY_API_BASE || '') + '/api/v1/auth/register',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify({name:(document.getElementById('first').value+' '+document.getElementById('last').value).trim(),email:document.getElementById('email').value.trim(),password,businessName:document.getElementById('businessName').value.trim()})});
       const body=await r.json().catch(()=>({}));
       if(!r.ok) throw new Error(body?.error?.message||'สร้างบัญชีไม่สำเร็จ');
       msg.textContent='สร้างบัญชีสำเร็จ'; location.href='dashboard.html';
